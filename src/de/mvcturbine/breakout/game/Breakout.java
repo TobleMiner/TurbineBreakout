@@ -14,7 +14,5 @@ public class Breakout extends Game
 	protected void tick()
 	{
 		super.tick();
-		this.setChanged();
-		this.notifyObservers();
 	}
 }
