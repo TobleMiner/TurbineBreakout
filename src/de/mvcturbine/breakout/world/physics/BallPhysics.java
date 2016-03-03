@@ -58,7 +58,7 @@ public class BallPhysics extends PhysicsModel
 		}
 		else if(!ball.getBounds().isInside(w.getBounds()))
 		{
-			Direction dir = ball.getBounds().getInnerCollidingFace(w.getBounds());
+			Direction dir = ball.getBounds().getInnerCollidingEdge(w.getBounds());
 			Vec2D vec = ball.getVelocity();
 			switch(dir)
 			{
