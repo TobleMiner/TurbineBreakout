@@ -34,17 +34,26 @@ public class TestGameRender extends JPanel implements Observer {
 	}
 
 	private void renderEntity(Entity e, Color c, BufferedImage img, double scaleX, double scaleY) {
-		Loc2D loc = e.getLocation();
-		for (int y = 0; y < e.getSize().height * scaleY; y++) {
-			for (int x = 0; x < e.getSize().width * scaleX; x++) {
-				try {
-					img.setRGB((int) (loc.x * scaleX + x), (int) (loc.y * scaleY + y), c.getRGB());
-				} catch (Exception ex) {
-					// System.out.println(new Loc2D((int) (loc.x * scaleX + x),
-					// (int) (loc.y * scaleY + y)).toString());
-				}
-			}
+		Loc2D[] corners = e.getBounds().getCorners();
+		Graphics2D gfx = (Graphics2D) img.getGraphics();
+		gfx.setColor(c);
+		for (int i = 0; i < corners.length; i++) {
+			gfx.drawLine((int) (corners[i].getX() * scaleX), (int) (corners[i].getY() * scaleY),
+					(int) (corners[(i + 1) % corners.length].getX() * scaleX),
+					(int) (corners[(i + 1) % corners.length].getY() * scaleY));
 		}
+		// Loc2D loc = e.getLocation();
+		// for (int y = 0; y < e.getSize().height * scaleY; y++) {
+		// for (int x = 0; x < e.getSize().width * scaleX; x++) {
+		// try {
+		// img.setRGB((int) (loc.x * scaleX + x), (int) (loc.y * scaleY + y),
+		// c.getRGB());
+		// } catch (Exception ex) {
+		// // System.out.println(new Loc2D((int) (loc.x * scaleX + x),
+		// // (int) (loc.y * scaleY + y)).toString());
+		// }
+		// }
+		// }
 	}
 
 	public Image render(int width, int height) {
