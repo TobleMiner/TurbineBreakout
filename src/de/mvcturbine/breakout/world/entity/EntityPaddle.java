@@ -6,11 +6,14 @@ import de.mvcturbine.world.entity.Entity;
 
 public class EntityPaddle extends Entity
 {
-
 	public EntityPaddle(World w)
 	{
 		super(w);
-		this.size = new Size2D(6d, 2d);
 	}
 
+	@Override
+	public Size2D getSize()
+	{
+		return new Size2D(6, 2);
+	}
 }

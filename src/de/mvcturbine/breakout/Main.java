@@ -17,6 +17,7 @@ public class Main extends JFrame implements Runnable
 		Dimension worldSize = new Dimension(20, 20);
 		Breakout b = new Breakout();
 		WorldBreakout world = new WorldBreakout(b, worldSize);
+		b.addObserver(world);
 		TestGameRender tgr = new TestGameRender(world);
 		this.getContentPane().add(tgr);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
