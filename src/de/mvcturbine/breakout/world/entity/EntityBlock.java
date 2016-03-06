@@ -20,4 +20,10 @@ public class EntityBlock extends Entity
 	{
 		return new Size2D(2, 1);
 	}
+
+	@Override
+	public boolean isSolid()
+	{
+		return true;
+	}
 }

@@ -2,11 +2,8 @@ package de.mvcturbine.breakout.world.physics;
 
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityBall;
-import de.mvcturbine.breakout.world.entity.EntityBlock;
-import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.EntityBB;
-import de.mvcturbine.world.entity.BoundEntity;
 import de.mvcturbine.world.entity.Entity;
 import de.mvcturbine.world.physics.PhysicsModel;
 
@@ -26,8 +23,7 @@ public class BallPhysics extends PhysicsModel
 
 		for(Entity ent : w.getAllEntities())
 		{
-			if(ent instanceof EntityPaddle || ent instanceof EntityBlock ||
-					ent instanceof BoundEntity)
+			if(ent.isSolid())
 			{
 
 				BoundingBox entbb = ent.getBounds();

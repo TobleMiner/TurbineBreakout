@@ -16,4 +16,10 @@ public class EntityPaddle extends Entity
 	{
 		return new Size2D(6, 2);
 	}
+
+	@Override
+	public boolean isSolid()
+	{
+		return true;
+	}
 }

@@ -26,4 +26,10 @@ public class EntityBall extends MovingEntity
 	{
 		return new Size2D(1, 1);
 	}
+
+	@Override
+	public boolean isSolid()
+	{
+		return false;
+	}
 }
