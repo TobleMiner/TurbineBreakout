@@ -1,4 +1,4 @@
-package de.mvcturbine.breakout.ui.render;
+package de.mvcturbine.breakout.ui.desktop.render;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,6 +17,7 @@ import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.world.World;
+import de.mvcturbine.world.entity.BoundEntity;
 import de.mvcturbine.world.entity.Entity;
 
 public class TestGameRender extends JPanel implements Observer
@@ -87,6 +88,10 @@ public class TestGameRender extends JPanel implements Observer
 			else if(ent instanceof EntityBlock)
 			{
 				renderEntity(ent, Color.RED, img, scaleX, scaleY);
+			}
+			else if(ent instanceof BoundEntity)
+			{
+				renderEntity(ent, Color.GREEN, img, scaleX, scaleY);
 			}
 		}
 		return img;

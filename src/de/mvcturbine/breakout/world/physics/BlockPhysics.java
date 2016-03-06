@@ -7,14 +7,17 @@ import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.EntityBB;
 import de.mvcturbine.world.physics.PhysicsModel;
 
-public class BlockPhysics extends PhysicsModel {
+public class BlockPhysics extends PhysicsModel
+{
 
-	public BlockPhysics(EntityBlock block) {
+	public BlockPhysics(EntityBlock block)
+	{
 		super(block);
 	}
 
 	@Override
-	public void apply() {
+	public void apply()
+	{
 
 		EntityBlock block = (EntityBlock) this.entity;
 		WorldBreakout w = (WorldBreakout) block.getWorld();
@@ -22,8 +25,8 @@ public class BlockPhysics extends PhysicsModel {
 		EntityBall ball = w.getBall();
 		BoundingBox babb = ball.getBounds();
 
-		if (babb.intersects(blbb)) {
-
+		if(babb.intersects(blbb))
+		{
 			block.remove(true);
 		}
 	}

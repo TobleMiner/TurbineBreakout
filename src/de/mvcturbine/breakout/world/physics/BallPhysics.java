@@ -35,52 +35,8 @@ public class BallPhysics extends PhysicsModel
 					{
 						ball.setVelocity(ball.getVelocity().setAngle(angle));
 					}
-
-					// int i = bbb.numberOfIntersectingCorners(pbb);
-					// System.out.format("Intersections: %d\n", i);
-					// Direction dir = bbb.getInnerCollidingFace(pbb);
-					// Vec2D vec = ball.getVelocity();
-					// if(i == 1)
-					// {
-					// vec.multiply(-1);
-					// }
-					// else
-					// {
-					// switch(dir)
-					// {
-					// case NORTH:
-					// case SOUTH:
-					// vec = new Vec2D(vec.x, -vec.y);
-					// break;
-					// case EAST:
-					// case WEST:
-					// vec = new Vec2D(-vec.x, vec.y);
-					// break;
-					// default:
-					// break;
-					// }
-					// }
-					// ball.setVelocity(vec);
 				}
 			}
-			// else if (!ball.getBounds().isInside(w.getBounds())) {
-			// Direction dir =
-			// ball.getBounds().getInnerCollidingEdge(w.getBounds());
-			// Vec2D vec = ball.getVelocity();
-			// switch (dir) {
-			// case NORTH:
-			// case SOUTH:
-			// vec = new Vec2D(vec.x, -vec.y);
-			// break;
-			// case EAST:
-			// case WEST:
-			// vec = new Vec2D(-vec.x, vec.y);
-			// break;
-			// default:
-			// break;
-			// }
-			// ball.setVelocity(vec);
-			// }
 		}
 	}
 }

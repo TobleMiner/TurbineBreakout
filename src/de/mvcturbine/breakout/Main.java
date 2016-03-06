@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import de.mvcturbine.breakout.game.Breakout;
-import de.mvcturbine.breakout.ui.render.TestGameRender;
+import de.mvcturbine.breakout.ui.desktop.WorldView;
 import de.mvcturbine.breakout.world.WorldBreakout;
 
 public class Main extends JFrame implements Runnable
@@ -18,8 +18,9 @@ public class Main extends JFrame implements Runnable
 		Breakout b = new Breakout();
 		WorldBreakout world = new WorldBreakout(b, worldSize);
 		b.addObserver(world);
-		TestGameRender tgr = new TestGameRender(world);
-		this.getContentPane().add(tgr);
+		WorldView view = new WorldView(world);
+		world.addObserver(view);
+		this.getContentPane().add(view);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("Breakout");
 		this.pack();
