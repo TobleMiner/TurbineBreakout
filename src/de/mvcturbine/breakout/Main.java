@@ -8,17 +8,27 @@ import javax.swing.SwingUtilities;
 import de.mvcturbine.breakout.game.Breakout;
 import de.mvcturbine.breakout.input.KeyboardInput;
 import de.mvcturbine.breakout.input.MouseInput;
-import de.mvcturbine.breakout.ui.desktop.WorldView;
+import de.mvcturbine.breakout.ui.desktop.DesktopWorldView;
+import de.mvcturbine.breakout.ui.lighthouse.LighthouseWorldView;
 import de.mvcturbine.breakout.world.WorldBreakout;
 
-public class Main extends JFrame implements Runnable {
+public class Main extends JFrame implements Runnable
+{
 	@Override
-	public void run() {
+	public void run()
+	{
 		Dimension worldSize = new Dimension(20, 20);
 		Breakout b = new Breakout();
 		WorldBreakout world = new WorldBreakout(b, worldSize);
 		b.addObserver(world);
-		WorldView view = new WorldView(world);
+		LighthouseWorldView lhView = new LighthouseWorldView(world);
+		world.addObserver(lhView);
+		if(!lhView.connect("10.42.0.135", 8000))
+		{
+			System.out.println("Failed to connect to lighthouse");
+			System.exit(1);
+		}
+		DesktopWorldView view = new DesktopWorldView(world);
 		world.addObserver(view);
 		this.getContentPane().add(view);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -31,7 +41,8 @@ public class Main extends JFrame implements Runnable {
 		this.addMouseMotionListener(new MouseInput(world, this.getSize()));
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		SwingUtilities.invokeLater(new Main());
 	}
 }

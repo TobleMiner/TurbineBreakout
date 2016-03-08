@@ -19,12 +19,12 @@ import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.entity.Entity;
 
-public class WorldView extends JPanel implements View
+public class DesktopWorldView extends JPanel implements View
 {
 	private final RenderRegistry renderRegistry;
 	private final World world;
 
-	public WorldView(WorldBreakout world)
+	public DesktopWorldView(WorldBreakout world)
 	{
 		super();
 		this.world = world;

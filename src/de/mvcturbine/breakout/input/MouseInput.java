@@ -8,14 +8,16 @@ import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.util.geom.Loc2D;
 
-public class MouseInput implements MouseMotionListener {
+public class MouseInput implements MouseMotionListener
+{
 
 	private WorldBreakout w;
 	private EntityPaddle paddle;
 	private Dimension viewSize;
 	private double xViewFactor;
 
-	public MouseInput(WorldBreakout world, Dimension viewSize) {
+	public MouseInput(WorldBreakout world, Dimension viewSize)
+	{
 		this.w = world;
 		this.paddle = (EntityPaddle) world.getPaddle();
 		this.viewSize = viewSize;
@@ -23,15 +25,16 @@ public class MouseInput implements MouseMotionListener {
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void mouseDragged(MouseEvent e)
+	{
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e)
+	{
 		this.paddle.setLocation(
-				new Loc2D(e.getX() * xViewFactor - paddle.getSize().getWidth() / 2, paddle.getLocation().getY()));
+				new Loc2D(e.getX() * xViewFactor - paddle.getSize().getWidth() / 2,
+						paddle.getLocation().getY()));
 	}
 
 }
