@@ -23,7 +23,7 @@ public class Main extends JFrame implements Runnable
 		b.addObserver(world);
 		LighthouseWorldView lhView = new LighthouseWorldView(world);
 		world.addObserver(lhView);
-		if(!lhView.connect("10.42.0.135", 8000))
+		if(false && !lhView.connect("10.42.0.135", 8000))
 		{
 			System.out.println("Failed to connect to lighthouse");
 			System.exit(1);

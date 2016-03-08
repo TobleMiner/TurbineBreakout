@@ -12,7 +12,7 @@ import de.mvcturbine.util.geom.Size2D;
 
 public class LhNetwork implements Runnable
 {
-	private static boolean SIMULATION = true;
+	private static boolean SIMULATION = false;
 
 	private static int WIDTH = 28;
 	private static int HEIGHT = 14;
@@ -43,7 +43,7 @@ public class LhNetwork implements Runnable
 		this.lightSocket = new Socket(host, port);
 		this.input = new BufferedReader(
 				new InputStreamReader(this.lightSocket.getInputStream()));
-		this.output = new DataOutputStream(lightSocket.getOutputStream());
+		this.output = new DataOutputStream(this.lightSocket.getOutputStream());
 		this.nwThread = new Thread(this);
 		this.nwThread.start();
 		this.connected = true;
@@ -70,12 +70,12 @@ public class LhNetwork implements Runnable
 			try
 			{
 				String str = this.input.readLine();
-				System.out.println(str);
 				String[] kvpair = this.parser.getKV(str);
 				switch(kvpair[0])
 				{
 					case ("bufLen"):
 						int bufferedFrames = Integer.parseInt(kvpair[1]);
+						System.out.format("%d frames buffered", str);
 						if(bufferedFrames <= this.frameBuffNum || SIMULATION)
 						{
 							sendFrame();

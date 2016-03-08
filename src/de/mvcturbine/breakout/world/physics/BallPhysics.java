@@ -23,9 +23,8 @@ public class BallPhysics extends PhysicsModel
 
 		for(Entity ent : w.getAllEntities())
 		{
-			if(ent.isSolid())
+			if(ent.isSolid() && ent != ball)
 			{
-
 				BoundingBox entbb = ent.getBounds();
 
 				if(bbb.intersects(entbb))

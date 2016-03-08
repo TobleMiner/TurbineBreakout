@@ -26,10 +26,12 @@ public class KeyboardInput implements KeyListener
 		switch(event.getKeyCode())
 		{
 			case KeyEvent.VK_A:
-				this.paddle.setLocation(paddle.getLocation().add(new Loc2D(-0.5, 0)));
+				Loc2D newLoc = paddle.getLocation().clone().add(new Loc2D(-0.5, 0));
+				if(this.paddle.canMoveTo(newLoc)) this.paddle.setLocation(newLoc);
 				break;
 			case KeyEvent.VK_D:
-				this.paddle.setLocation(paddle.getLocation().add(new Loc2D(0.5, 0)));
+				newLoc = paddle.getLocation().clone().add(new Loc2D(0.5, 0));
+				if(this.paddle.canMoveTo(newLoc)) this.paddle.setLocation(newLoc);
 				break;
 			default:
 				break;

@@ -30,6 +30,12 @@ public class EntityBall extends MovingEntity
 	@Override
 	public boolean isSolid()
 	{
-		return false;
+		return true;
+	}
+
+	@Override
+	public boolean visible()
+	{
+		return true;
 	}
 }

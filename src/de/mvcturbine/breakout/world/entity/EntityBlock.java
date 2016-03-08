@@ -26,4 +26,10 @@ public class EntityBlock extends Entity
 	{
 		return true;
 	}
+
+	@Override
+	public boolean visible()
+	{
+		return true;
+	}
 }

@@ -22,12 +22,12 @@ public class WorldBreakout extends World
 		super(game, size);
 		this.ball = new EntityBall(this);
 		this.ball.setVelocity(new Vec2D(new Size2D(size)).divide(3));
-		this.ball.setLocation(new Loc2D(size.width / 2, 3));
+		this.ball.setLocation(new Loc2D(size.width / 2, 2.5));
 		this.entityRegistry.add(this.ball);
 		this.addObserver(this.ball);
 		this.paddle = new EntityPaddle(this);
 		this.paddle
-				.setLocation(new Loc2D(size.width / 2 - paddle.getSize().width / 2, 5));
+				.setLocation(new Loc2D(size.width / 2 - paddle.getSize().width / 2, 2));
 		this.entityRegistry.add(this.paddle);
 		this.addObserver(this.paddle);
 		EntityBlock block = new EntityBlock(this);
