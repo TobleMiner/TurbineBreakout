@@ -8,6 +8,8 @@ import de.mvcturbine.breakout.world.entity.EntityBall;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityGameAction;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
+import de.mvcturbine.breakout.world.entity.powerup.EntityPowerup;
+import de.mvcturbine.breakout.world.entity.powerup.Powerup;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.util.geom.Vec2D;
@@ -56,6 +58,21 @@ public class LevelGenerator
 						worldSize.height - (this.blockSpacing.height +
 								this.blockSize.height + y *
 										(this.blockSize.height + blockSpacing.height))));
+				if(rand.nextDouble() < this.powerupProbability)
+				{
+					Powerup[] powerups = Powerup.values();
+					Powerup pup = powerups[rand.nextInt(powerups.length)];
+					pup = Powerup.PADDLE_STICKY;
+					EntityPowerup powerup = new EntityPowerup(this.world);
+					powerup.setEffect(pup);
+					block.setPowerup(powerup);
+					Loc2D center = block.getLocation().clone()
+							.add(new Vec2D(block.getSize()).divide(2));
+					Loc2D loc = center.clone()
+							.sub(new Vec2D(powerup.getSize()).divide(2));
+					powerup.setLocation(loc);
+					this.world.addEntity(powerup);
+				}
 				this.world.addEntity(block);
 			}
 		}

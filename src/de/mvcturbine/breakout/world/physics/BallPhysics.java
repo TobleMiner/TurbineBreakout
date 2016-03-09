@@ -2,6 +2,7 @@ package de.mvcturbine.breakout.world.physics;
 
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityBall;
+import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.EntityBB;
@@ -53,10 +54,14 @@ public class BallPhysics extends PhysicsModel
 					}
 					else
 					{
-						double angle = bbb.getCollisionAngle(entbb);
-						if(!Double.isNaN(angle))
+						if(!ball.isBreakthrough() || !(ent instanceof EntityBlock))
 						{
-							ball.setVelocity(ball.getVelocity().clone().setAngle(angle));
+							double angle = bbb.getCollisionAngle(entbb);
+							if(!Double.isNaN(angle))
+							{
+								ball.setVelocity(
+										ball.getVelocity().clone().setAngle(angle));
+							}
 						}
 					}
 				}

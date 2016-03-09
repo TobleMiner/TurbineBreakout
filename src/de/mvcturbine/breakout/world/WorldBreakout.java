@@ -20,6 +20,8 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	private EntityBall ball;
 	private EntityPaddle paddle;
 
+	private double powerUpFallTime = 0.2d;
+
 	private double multiplier;
 	private double score;
 
@@ -74,12 +76,12 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 
 	public void scoreHit()
 	{
-		this.score += this.POINTS_HIT * this.multiplier;
+		this.score += POINTS_HIT * this.multiplier;
 	}
 
 	public void scoreBreak()
 	{
-		this.score += this.POINTS_BREAK * this.multiplier;
+		this.score += POINTS_BREAK * this.multiplier;
 	}
 
 	/**
@@ -98,5 +100,22 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	public void setPaddle(EntityPaddle paddle)
 	{
 		this.paddle = paddle;
+	}
+
+	/**
+	 * @return the powerUpFallTime
+	 */
+	public double getPowerUpFallTime()
+	{
+		return powerUpFallTime;
+	}
+
+	/**
+	 * @param powerUpFallTime
+	 *            the powerUpFallTime to set
+	 */
+	public void setPowerUpFallTime(double powerUpFallTime)
+	{
+		this.powerUpFallTime = powerUpFallTime;
 	}
 }
