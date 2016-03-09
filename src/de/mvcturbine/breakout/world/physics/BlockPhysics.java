@@ -18,7 +18,6 @@ public class BlockPhysics extends PhysicsModel
 	@Override
 	public void apply()
 	{
-
 		EntityBlock block = (EntityBlock) this.entity;
 		WorldBreakout w = (WorldBreakout) block.getWorld();
 		EntityBB blbb = block.getBounds();
@@ -27,7 +26,7 @@ public class BlockPhysics extends PhysicsModel
 
 		if(babb.intersects(blbb))
 		{
-			block.remove(true);
+			block.hit();
 		}
 	}
 

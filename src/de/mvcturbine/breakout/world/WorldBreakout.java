@@ -4,7 +4,9 @@ import java.awt.Dimension;
 
 import de.mvcturbine.breakout.world.entity.EntityBall;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
+import de.mvcturbine.breakout.world.entity.EntityGameAction;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
+import de.mvcturbine.breakout.world.level.LevelGenerator;
 import de.mvcturbine.game.Game;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
@@ -12,7 +14,7 @@ import de.mvcturbine.util.geom.Vec2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.entity.Entity;
 
-public class WorldBreakout extends World
+public class WorldBreakout extends World implements EntityGameAction.ActionCallback
 {
 	private EntityBall ball;
 	private EntityPaddle paddle;
@@ -35,17 +37,25 @@ public class WorldBreakout extends World
 		double block_spacing = 0.45d;
 		int num_blocks = (int) (size.width / (block_spacing + block_width));
 		int num_rows = 5;
-		for(int y = 0; y < num_rows; y++)
-		{
-			for(int x = 0; x < num_blocks; x++)
-			{
-				EntityBlock block = new EntityBlock(this);
-				block.setLocation(new Loc2D(block_spacing * (x + 1) + block_width * x,
-						size.height - ((y + 1) * block_height + y * block_spacing)));
-				this.addObserver(block);
-				this.entityRegistry.add(block);
-			}
-		}
+		LevelGenerator gen = new LevelGenerator(this);
+		gen.populateWorld();
+		// for(int y = 0; y < num_rows; y++)
+		// {
+		// for(int x = 0; x < num_blocks; x++)
+		// {
+		// EntityBlock block = new EntityBlock(this,
+		// game.rand.nextInt(EntityBlock.MAX_DURABILITY) + 1);
+		// block.setLocation(new Loc2D(block_spacing * (x + 1) + block_width *
+		// x,
+		// size.height - ((y + 1) * block_height + y * block_spacing)));
+		// this.addObserver(block);
+		// this.entityRegistry.add(block);
+		// }
+		// }
+		EntityGameAction ballPit = new EntityGameAction(this,
+				new Size2D(size.getWidth(), 1), this);
+		ballPit.setLocation(new Loc2D());
+		this.addEntity(ballPit);
 	}
 
 	@Override
@@ -77,5 +87,11 @@ public class WorldBreakout extends World
 	public Entity getPaddle()
 	{
 		return paddle;
+	}
+
+	@Override
+	public void actionEntityHit(EntityGameAction entity, Entity who)
+	{
+		if(who instanceof EntityBall) who.remove(true);
 	}
 }
