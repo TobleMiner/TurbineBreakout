@@ -27,6 +27,10 @@ public class BlockPhysics extends PhysicsModel
 		if(babb.intersects(blbb))
 		{
 			block.hit();
+			if(block.getDurability() == 0)
+				w.scoreBreak();
+			else
+				w.scoreHit();
 		}
 	}
 

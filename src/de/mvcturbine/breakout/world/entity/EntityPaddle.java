@@ -10,15 +10,31 @@ import de.mvcturbine.world.entity.Entity;
 
 public class EntityPaddle extends Entity
 {
+	public static double REFLECT_ANGLE_MIN = -45 / 180d * Math.PI;
+	public static double REFLECT_ANGLE_MAX = 45 / 180d * Math.PI;
+
+	private Size2D size;
+
 	public EntityPaddle(World w)
 	{
+		this(w, new Size2D(5, 0.5));
+	}
+
+	public EntityPaddle(World w, Size2D size)
+	{
 		super(w);
+		this.size = size;
 	}
 
 	@Override
 	public Size2D getSize()
 	{
-		return new Size2D(5, 0.5);
+		return this.size;
+	}
+
+	public void setSize(Size2D size)
+	{
+		this.size = size;
 	}
 
 	@Override

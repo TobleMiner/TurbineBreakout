@@ -2,8 +2,12 @@ package de.mvcturbine.breakout.world.physics;
 
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityBall;
+import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.EntityBB;
+import de.mvcturbine.util.geom.Loc2D;
+import de.mvcturbine.util.geom.Vec2D;
+import de.mvcturbine.world.entity.BoundEntity;
 import de.mvcturbine.world.entity.Entity;
 import de.mvcturbine.world.physics.PhysicsModel;
 
@@ -23,16 +27,37 @@ public class BallPhysics extends PhysicsModel
 
 		for(Entity ent : w.getAllEntities())
 		{
-			if(ent.isSolid() && ent != ball)
+			if(ent == ball) continue;
+			if(ent.isSolid())
 			{
+				if(ent instanceof BoundEntity) w.combobreaker();
 				BoundingBox entbb = ent.getBounds();
 
 				if(bbb.intersects(entbb))
 				{
-					double angle = bbb.getCollisionAngle(entbb);
-					if(!Double.isNaN(angle))
+					if(ent instanceof EntityPaddle)
 					{
-						ball.setVelocity(ball.getVelocity().setAngle(angle));
+						double angleDelta = EntityPaddle.REFLECT_ANGLE_MAX -
+								EntityPaddle.REFLECT_ANGLE_MIN;
+						Loc2D midpoint = ball.getLocation()
+								.add(new Vec2D(ball.getSize()).divide(2));
+						EntityPaddle paddle = w.getPaddle();
+						double paddleDelta = midpoint.getX() -
+								paddle.getLocation().getX();
+						double angle = EntityPaddle.REFLECT_ANGLE_MIN +
+								angleDelta * (paddleDelta / paddle.getSize().width);
+						angle = Math.max(angle, EntityPaddle.REFLECT_ANGLE_MIN);
+						angle = Math.min(angle, EntityPaddle.REFLECT_ANGLE_MAX);
+						ball.setVelocity(ball.getVelocity().clone().setAngle(
+								new Vec2D(1, 0).getAngle() + Math.PI / 2 - angle));
+					}
+					else
+					{
+						double angle = bbb.getCollisionAngle(entbb);
+						if(!Double.isNaN(angle))
+						{
+							ball.setVelocity(ball.getVelocity().clone().setAngle(angle));
+						}
 					}
 				}
 			}

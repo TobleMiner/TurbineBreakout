@@ -1,5 +1,6 @@
 package de.mvcturbine.breakout.world.entity;
 
+import de.mvcturbine.breakout.world.entity.powerup.EntityPowerup;
 import de.mvcturbine.breakout.world.physics.BlockPhysics;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.World;
@@ -12,6 +13,8 @@ public class EntityBlock extends Entity
 	private int durability;
 
 	private final Size2D size;
+
+	private EntityPowerup powerup;
 
 	public EntityBlock(World w)
 	{
@@ -75,5 +78,21 @@ public class EntityBlock extends Entity
 	{
 		this.durability--;
 		if(this.durability == 0) this.remove(true);
+	}
+
+	/**
+	 * @return the powerup
+	 */
+	public EntityPowerup getPowerup()
+	{
+		return powerup;
+	}
+
+	/**
+	 * @param powerup the powerup to set
+	 */
+	public void setPowerup(EntityPowerup powerup)
+	{
+		this.powerup = powerup;
 	}
 }
