@@ -8,8 +8,11 @@ import javax.swing.SwingUtilities;
 import de.mvcturbine.breakout.game.Breakout;
 import de.mvcturbine.breakout.input.KeyboardInput;
 import de.mvcturbine.breakout.input.MouseInput;
+import de.mvcturbine.breakout.network.lighthouse.LhNetwork;
 import de.mvcturbine.breakout.ui.desktop.DesktopWorldView;
+import de.mvcturbine.breakout.ui.lighthouse.LightHouseTextView;
 import de.mvcturbine.breakout.ui.lighthouse.LighthouseWorldView;
+import de.mvcturbine.breakout.ui.lighthouse.render.font.LightHouseFontRender;
 import de.mvcturbine.breakout.world.WorldBreakout;
 
 public class Main extends JFrame implements Runnable
@@ -21,9 +24,12 @@ public class Main extends JFrame implements Runnable
 		Breakout b = new Breakout();
 		WorldBreakout world = new WorldBreakout(b, worldSize);
 		b.addObserver(world);
-		LighthouseWorldView lhView = new LighthouseWorldView(world);
+		LhNetwork lighthouse = new LhNetwork();
+		LighthouseWorldView lhView = new LighthouseWorldView(world, lighthouse);
+		LightHouseTextView tv = new LightHouseTextView(0.5d, "HELLOWORLD",
+				new LightHouseFontRender(), b, lighthouse);
 		world.addObserver(lhView);
-		if(false && !lhView.connect("10.42.0.135", 8000))
+		if(!lhView.connect("10.10.10.89", 8000))
 		{
 			System.out.println("Failed to connect to lighthouse");
 			System.exit(1);

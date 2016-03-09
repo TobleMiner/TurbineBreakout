@@ -12,7 +12,7 @@ import de.mvcturbine.util.geom.Size2D;
 
 public class LhNetwork implements Runnable
 {
-	private static boolean SIMULATION = false;
+	private static boolean SIMULATION = true;
 
 	private static int WIDTH = 28;
 	private static int HEIGHT = 14;
@@ -75,7 +75,7 @@ public class LhNetwork implements Runnable
 				{
 					case ("bufLen"):
 						int bufferedFrames = Integer.parseInt(kvpair[1]);
-						System.out.format("%d frames buffered", str);
+						System.out.format("%d frames buffered\n", bufferedFrames);
 						if(bufferedFrames <= this.frameBuffNum || SIMULATION)
 						{
 							sendFrame();

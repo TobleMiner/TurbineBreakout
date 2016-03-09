@@ -30,11 +30,37 @@ public class WorldBreakout extends World
 				.setLocation(new Loc2D(size.width / 2 - paddle.getSize().width / 2, 2));
 		this.entityRegistry.add(this.paddle);
 		this.addObserver(this.paddle);
-		EntityBlock block = new EntityBlock(this);
-		block.setLocation(new Loc2D(size.width / 4,
-				this.getSize().height - block.getSize().height));
-		this.addObserver(block);
-		this.entityRegistry.add(block);
+		double block_width = 2d;
+		double block_height = 1d;
+		double block_spacing = 0.45d;
+		int num_blocks = (int) (size.width / (block_spacing + block_width));
+		int num_rows = 5;
+		for(int y = 0; y < num_rows; y++)
+		{
+			for(int x = 0; x < num_blocks; x++)
+			{
+				EntityBlock block = new EntityBlock(this);
+				block.setLocation(new Loc2D(block_spacing * (x + 1) + block_width * x,
+						size.height - ((y + 1) * block_height + y * block_spacing)));
+				this.addObserver(block);
+				this.entityRegistry.add(block);
+			}
+		}
+	}
+
+	@Override
+	public void tick()
+	{
+		super.tick();
+		boolean finish = true;
+		for(Entity e : this.entityRegistry)
+		{
+			if(e instanceof EntityBlock)
+			{
+				finish = false;
+			}
+		}
+		// if(finish) this.getGame().stop();
 	}
 
 	/**
