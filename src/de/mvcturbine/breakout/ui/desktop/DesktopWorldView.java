@@ -16,10 +16,12 @@ import de.mvcturbine.breakout.ui.desktop.render.entity.BlockTextureOverlayRender
 import de.mvcturbine.breakout.ui.desktop.render.entity.GenericEntityMeshRender;
 import de.mvcturbine.breakout.ui.desktop.render.entity.PaddleRender;
 import de.mvcturbine.breakout.ui.desktop.render.entity.fx.Laz0rBeamRender;
+import de.mvcturbine.breakout.ui.desktop.render.entity.fx.ScoreRender;
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.breakout.world.entity.fx.EntityLaz0rBeam;
+import de.mvcturbine.breakout.world.entity.fx.EntityScore;
 import de.mvcturbine.ui.View;
 import de.mvcturbine.ui.render.RenderRegistry;
 import de.mvcturbine.ui.render.entity.EntityRender;
@@ -53,6 +55,7 @@ public class DesktopWorldView extends JPanel implements View
 		this.renderRegistry.registerRender(new Laz0rBeamRender(),
 				EntityLaz0rBeam.class);
 		this.renderRegistry.registerRender(new PaddleRender(), EntityPaddle.class);
+		this.renderRegistry.registerRender(new ScoreRender(), EntityScore.class);
 	}
 
 	@Override
