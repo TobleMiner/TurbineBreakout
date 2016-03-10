@@ -89,7 +89,8 @@ public class EntityBlock extends Entity
 	}
 
 	/**
-	 * @param powerup the powerup to set
+	 * @param powerup
+	 *            the powerup to set
 	 */
 	public void setPowerup(EntityPowerup powerup)
 	{
