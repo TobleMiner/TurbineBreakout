@@ -7,9 +7,11 @@ import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityGameAction;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.breakout.world.entity.fx.EntityScore;
+import de.mvcturbine.breakout.world.entity.fx.EntityScoreParticle;
 import de.mvcturbine.breakout.world.level.LevelGenerator;
 import de.mvcturbine.game.Game;
 import de.mvcturbine.util.geom.Loc2D;
+import de.mvcturbine.util.geom.Vec2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.entity.Entity;
 import de.mvcturbine.world.entity.MovingEntity;
@@ -21,6 +23,7 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 
 	private EntityBall ball;
 	private EntityPaddle paddle;
+	private EntityScore entityScore;
 
 	private double powerUpFallTime = 0.2d;
 
@@ -33,9 +36,9 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 		LevelGenerator gen = new LevelGenerator(this);
 		gen.populateWorld();
 
-		EntityScore score = new EntityScore(this);
-		score.setLocation(new Loc2D(0, 1));
-		addEntity(score);
+		this.entityScore = new EntityScore(this);
+		this.entityScore.setLocation(new Loc2D(0, 1));
+		addEntity(entityScore);
 	}
 
 	@Override
@@ -80,14 +83,27 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 		this.multiplier = 1;
 	}
 
+	protected void setScore(double score)
+	{
+		Double diff = score - this.score;
+		Loc2D particlePos = this.entityScore.getLocation().clone();
+
+		EntityScoreParticle particle = new EntityScoreParticle(this, diff);
+		particle.setLocation(particlePos);
+		particle.setVelocity(new Vec2D(0, 2));
+		addEntity(particle);
+
+		this.score = score;
+	}
+
 	public void scoreHit()
 	{
-		this.score += POINTS_HIT * this.multiplier;
+		setScore(this.score + (POINTS_HIT * this.multiplier));
 	}
 
 	public void scoreBreak()
 	{
-		this.score += POINTS_BREAK * this.multiplier;
+		setScore(this.score + (POINTS_BREAK * this.multiplier));
 	}
 
 	/**
