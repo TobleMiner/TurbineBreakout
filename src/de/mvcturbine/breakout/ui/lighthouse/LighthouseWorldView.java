@@ -6,8 +6,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import de.mvcturbine.breakout.network.lighthouse.LhNetwork;
+import de.mvcturbine.breakout.ui.lighthouse.render.entity.BallRender;
+import de.mvcturbine.breakout.ui.lighthouse.render.entity.BlockRender;
 import de.mvcturbine.breakout.ui.lighthouse.render.entity.GenericEntityPixelRender;
+import de.mvcturbine.breakout.ui.lighthouse.render.entity.PaddleRender;
 import de.mvcturbine.breakout.world.WorldBreakout;
+import de.mvcturbine.breakout.world.entity.EntityBall;
+import de.mvcturbine.breakout.world.entity.EntityBlock;
+import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.ui.render.RenderRegistry;
 import de.mvcturbine.ui.render.entity.EntityRender;
 import de.mvcturbine.util.geom.Size2D;
@@ -25,6 +31,9 @@ public class LighthouseWorldView extends LightHouseView
 		this.world = world;
 		this.renderRegistry = new RenderRegistry();
 		this.renderRegistry.registerRender(new GenericEntityPixelRender(), Entity.class);
+		this.renderRegistry.registerRender(new PaddleRender(), EntityPaddle.class);
+		this.renderRegistry.registerRender(new BlockRender(), EntityBlock.class);
+		this.renderRegistry.registerRender(new BallRender(), EntityBall.class);
 	}
 
 	@Override
