@@ -5,12 +5,14 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 
 import javax.swing.JPanel;
 
-import de.mvcturbine.breakout.ui.desktop.render.entity.BlockImageRender;
+import de.mvcturbine.breakout.ui.desktop.render.entity.BlockColorRender;
+import de.mvcturbine.breakout.ui.desktop.render.entity.BlockTextureRender;
 import de.mvcturbine.breakout.ui.desktop.render.entity.GenericEntityMeshRender;
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
@@ -32,7 +34,16 @@ public class DesktopWorldView extends JPanel implements View
 		this.world = world;
 		this.renderRegistry = new RenderRegistry();
 		this.renderRegistry.registerRender(new GenericEntityMeshRender(), Entity.class);
-		this.renderRegistry.registerRender(new BlockImageRender(), EntityBlock.class);
+		try
+		{
+			this.renderRegistry.registerRender(new BlockTextureRender(),
+					EntityBlock.class);
+		}
+		catch(IOException ex)
+		{
+			ex.printStackTrace();
+			this.renderRegistry.registerRender(new BlockColorRender(), EntityBlock.class);
+		}
 	}
 
 	@Override

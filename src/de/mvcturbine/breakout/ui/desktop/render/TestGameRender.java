@@ -51,18 +51,6 @@ public class TestGameRender extends JPanel implements Observer
 					img.getHeight() -
 							(int) (corners[(i + 1) % corners.length].getY() * scaleY));
 		}
-		// Loc2D loc = e.getLocation();
-		// for (int y = 0; y < e.getSize().height * scaleY; y++) {
-		// for (int x = 0; x < e.getSize().width * scaleX; x++) {
-		// try {
-		// img.setRGB((int) (loc.x * scaleX + x), (int) (loc.y * scaleY + y),
-		// c.getRGB());
-		// } catch (Exception ex) {
-		// // System.out.println(new Loc2D((int) (loc.x * scaleX + x),
-		// // (int) (loc.y * scaleY + y)).toString());
-		// }
-		// }
-		// }
 	}
 
 	public Image render(int width, int height)
