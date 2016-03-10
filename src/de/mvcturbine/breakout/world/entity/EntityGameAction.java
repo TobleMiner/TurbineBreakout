@@ -32,7 +32,7 @@ public class EntityGameAction extends Entity
 	@Override
 	public boolean visible()
 	{
-		return false;
+		return true;
 	}
 
 	/**
