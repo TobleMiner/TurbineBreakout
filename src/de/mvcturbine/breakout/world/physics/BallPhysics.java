@@ -31,11 +31,11 @@ public class BallPhysics extends PhysicsModel
 			if(ent == ball) continue;
 			if(ent.isSolid())
 			{
-				if(ent instanceof BoundEntity) w.combobreaker();
 				BoundingBox entbb = ent.getBounds();
 
 				if(bbb.intersects(entbb))
 				{
+					if(ent instanceof BoundEntity) w.combobreaker();
 					if(ent instanceof EntityPaddle)
 					{
 						double angleDelta = EntityPaddle.REFLECT_ANGLE_MAX -
