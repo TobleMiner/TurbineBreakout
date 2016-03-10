@@ -12,7 +12,7 @@ import java.util.Observable;
 import javax.swing.JPanel;
 
 import de.mvcturbine.breakout.ui.desktop.render.entity.BlockColorRender;
-import de.mvcturbine.breakout.ui.desktop.render.entity.BlockTextureRender;
+import de.mvcturbine.breakout.ui.desktop.render.entity.BlockTextureOverlayRender;
 import de.mvcturbine.breakout.ui.desktop.render.entity.GenericEntityMeshRender;
 import de.mvcturbine.breakout.ui.desktop.render.entity.PaddleRender;
 import de.mvcturbine.breakout.ui.desktop.render.entity.fx.Laz0rBeamRender;
@@ -37,18 +37,21 @@ public class DesktopWorldView extends JPanel implements View
 		super();
 		this.world = world;
 		this.renderRegistry = new RenderRegistry();
-		this.renderRegistry.registerRender(new GenericEntityMeshRender(), Entity.class);
+		this.renderRegistry.registerRender(new GenericEntityMeshRender(),
+				Entity.class);
 		try
 		{
-			this.renderRegistry.registerRender(new BlockTextureRender(),
+			this.renderRegistry.registerRender(new BlockTextureOverlayRender(),
 					EntityBlock.class);
 		}
 		catch(IOException ex)
 		{
 			ex.printStackTrace();
-			this.renderRegistry.registerRender(new BlockColorRender(), EntityBlock.class);
+			this.renderRegistry.registerRender(new BlockColorRender(),
+					EntityBlock.class);
 		}
-		this.renderRegistry.registerRender(new Laz0rBeamRender(), EntityLaz0rBeam.class);
+		this.renderRegistry.registerRender(new Laz0rBeamRender(),
+				EntityLaz0rBeam.class);
 		this.renderRegistry.registerRender(new PaddleRender(), EntityPaddle.class);
 	}
 
