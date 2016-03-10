@@ -3,13 +3,14 @@ package de.mvcturbine.breakout.world.entity;
 import de.mvcturbine.util.geom.EntityBB.Moving;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Vec2D;
+import de.mvcturbine.world.entity.MovingEntity;
 
-public class BallBoundingBox extends Moving
+public class RoundBoundingBox extends Moving
 {
 
 	private static int CIRCLE_CORNERS = 100;
 
-	public BallBoundingBox(EntityBall e)
+	public RoundBoundingBox(MovingEntity e)
 	{
 		super(e);
 	}

@@ -80,12 +80,19 @@ public class EntityBlock extends Entity
 		if(this.durability == 0) this.remove(true);
 	}
 
+	public void destroy()
+	{
+		this.durability = 0;
+		this.remove(true);
+		if(this.powerup != null) this.powerup.remove(true);
+	}
+
 	/**
 	 * @return the powerup
 	 */
 	public EntityPowerup getPowerup()
 	{
-		return powerup;
+		return this.powerup;
 	}
 
 	/**

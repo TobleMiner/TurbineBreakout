@@ -8,6 +8,8 @@ import de.mvcturbine.breakout.world.entity.EntityBall;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityGameAction;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
+import de.mvcturbine.breakout.world.entity.powerup.EntityPowerup;
+import de.mvcturbine.breakout.world.entity.powerup.Powerup;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.util.geom.Vec2D;
@@ -22,7 +24,7 @@ public class LevelGenerator
 	private int durabilityMin = 1;
 	private int durabilityMax = EntityBlock.MAX_DURABILITY;
 	private double brickPlaceProbability = 1.0;
-	private double powerupProbability = 1.0;
+	private double powerupProbability = 0.05;
 	private Vec2D paddleOffset = new Vec2D(0, 0.5);
 	private Size2D paddleSize = new Size2D(3, 0.5);
 	private Vec2D ballOffset = new Vec2D(1, 1);
@@ -56,6 +58,20 @@ public class LevelGenerator
 						worldSize.height - (this.blockSpacing.height +
 								this.blockSize.height + y *
 										(this.blockSize.height + blockSpacing.height))));
+				if(rand.nextDouble() < this.powerupProbability)
+				{
+					Powerup[] powerups = Powerup.values();
+					Powerup pup = powerups[rand.nextInt(powerups.length)];
+					EntityPowerup powerup = new EntityPowerup(this.world);
+					powerup.setEffect(pup);
+					block.setPowerup(powerup);
+					Loc2D center = block.getLocation().clone()
+							.add(new Vec2D(block.getSize()).divide(2));
+					Loc2D loc = center.clone()
+							.sub(new Vec2D(powerup.getSize()).divide(2));
+					powerup.setLocation(loc);
+					this.world.addEntity(powerup);
+				}
 				this.world.addEntity(block);
 			}
 		}

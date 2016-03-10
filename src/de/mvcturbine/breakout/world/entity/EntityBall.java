@@ -8,6 +8,7 @@ import de.mvcturbine.world.entity.MovingEntity;
 
 public class EntityBall extends MovingEntity
 {
+	private boolean breakthrough = false;
 
 	public EntityBall(World w)
 	{
@@ -18,7 +19,7 @@ public class EntityBall extends MovingEntity
 	@Override
 	public Moving getBounds()
 	{
-		return new BallBoundingBox(this);
+		return new RoundBoundingBox(this);
 	}
 
 	@Override
@@ -37,5 +38,21 @@ public class EntityBall extends MovingEntity
 	public boolean visible()
 	{
 		return true;
+	}
+
+	/**
+	 * @return the breakthrough
+	 */
+	public boolean isBreakthrough()
+	{
+		return breakthrough;
+	}
+
+	/**
+	 * @param breakthrough the breakthrough to set
+	 */
+	public void setBreakthrough(boolean breakthrough)
+	{
+		this.breakthrough = breakthrough;
 	}
 }

@@ -14,8 +14,12 @@ import javax.swing.JPanel;
 import de.mvcturbine.breakout.ui.desktop.render.entity.BlockColorRender;
 import de.mvcturbine.breakout.ui.desktop.render.entity.BlockTextureRender;
 import de.mvcturbine.breakout.ui.desktop.render.entity.GenericEntityMeshRender;
+import de.mvcturbine.breakout.ui.desktop.render.entity.PaddleRender;
+import de.mvcturbine.breakout.ui.desktop.render.entity.fx.Laz0rBeamRender;
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
+import de.mvcturbine.breakout.world.entity.EntityPaddle;
+import de.mvcturbine.breakout.world.entity.fx.EntityLaz0rBeam;
 import de.mvcturbine.ui.View;
 import de.mvcturbine.ui.render.RenderRegistry;
 import de.mvcturbine.ui.render.entity.EntityRender;
@@ -44,6 +48,8 @@ public class DesktopWorldView extends JPanel implements View
 			ex.printStackTrace();
 			this.renderRegistry.registerRender(new BlockColorRender(), EntityBlock.class);
 		}
+		this.renderRegistry.registerRender(new Laz0rBeamRender(), EntityLaz0rBeam.class);
+		this.renderRegistry.registerRender(new PaddleRender(), EntityPaddle.class);
 	}
 
 	@Override

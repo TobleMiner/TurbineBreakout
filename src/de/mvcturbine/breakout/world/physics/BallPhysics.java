@@ -2,6 +2,7 @@ package de.mvcturbine.breakout.world.physics;
 
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityBall;
+import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.EntityBB;
@@ -53,24 +54,26 @@ public class BallPhysics extends PhysicsModel
 					}
 					else
 					{
-						double angle = bbb.getCollisionAngle(entbb);
-						if(!Double.isNaN(angle))
+						if(!ball.isBreakthrough() || !(ent instanceof EntityBlock))
 						{
-							ball.setVelocity(ball.getVelocity().clone().setAngle(angle));
-							if(Math.abs(ball.getVelocity().getY() /
-									ball.getVelocity().getX()) < 0.2)
+							double angle = bbb.getCollisionAngle(entbb);
+							if(!Double.isNaN(angle))
 							{
-								Vec2D ballVelocity = ball.getVelocity().clone();
-								double yxQuotient = ballVelocity.getY() /
-										ballVelocity.getX();
-								Vec2D newVelocity = new Vec2D(ballVelocity.getX(),
-										ballVelocity.getY() * (0.2 / yxQuotient));
-								newVelocity.multiply(
-										ballVelocity.length() / newVelocity.length());
-								ball.setVelocity(newVelocity);
-								// System.out.println("Flat angle");
+								ball.setVelocity(
+										ball.getVelocity().clone().setAngle(angle));
+								if(Math.abs(ball.getVelocity().getY() /
+										ball.getVelocity().getX()) < 0.2)
+								{
+									Vec2D ballVelocity = ball.getVelocity().clone();
+									double yxQuotient = ballVelocity.getY() /
+											ballVelocity.getX();
+									Vec2D newVelocity = new Vec2D(ballVelocity.getX(),
+											ballVelocity.getY() * (0.2 / yxQuotient));
+									newVelocity.multiply(
+											ballVelocity.length() / newVelocity.length());
+									ball.setVelocity(newVelocity);
+								}
 							}
-
 						}
 					}
 				}

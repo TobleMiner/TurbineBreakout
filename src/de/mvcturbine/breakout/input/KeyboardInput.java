@@ -16,7 +16,7 @@ public class KeyboardInput implements KeyListener
 	public KeyboardInput(WorldBreakout world)
 	{
 		this.w = world;
-		this.paddle = (EntityPaddle) w.getPaddle();
+		this.paddle = w.getPaddle();
 	}
 
 	@Override
@@ -25,13 +25,19 @@ public class KeyboardInput implements KeyListener
 
 		switch(event.getKeyCode())
 		{
+			case KeyEvent.VK_LEFT:
 			case KeyEvent.VK_A:
 				Loc2D newLoc = paddle.getLocation().clone().add(new Loc2D(-0.5, 0));
 				if(this.paddle.canMoveTo(newLoc)) this.paddle.setLocation(newLoc);
 				break;
+			case KeyEvent.VK_RIGHT:
 			case KeyEvent.VK_D:
 				newLoc = paddle.getLocation().clone().add(new Loc2D(0.5, 0));
 				if(this.paddle.canMoveTo(newLoc)) this.paddle.setLocation(newLoc);
+				break;
+			case KeyEvent.VK_SPACE:
+			case KeyEvent.VK_W:
+				if(this.paddle.isArmed()) this.paddle.shoot();
 				break;
 			default:
 				break;
