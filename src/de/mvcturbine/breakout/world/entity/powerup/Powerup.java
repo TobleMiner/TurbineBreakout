@@ -6,10 +6,10 @@ public enum Powerup
 {
 	PADDLE_LARGER(Color.BLUE),
 	PADDLE_SMALLER(Color.ORANGE),
-	PADDLE_STICKY(Color.GREEN),
+	// PADDLE_STICKY(Color.GREEN),
 	PADDLE_LAZ0R(Color.RED),
-	BALL_MULTI(Color.CYAN),
-	BALL_EXPLOSIVE(Color.YELLOW),
+	// BALL_MULTI(Color.CYAN),
+	// BALL_EXPLOSIVE(Color.YELLOW),
 	BALL_BREAKTHROUGH(Color.GRAY);
 
 	private Color color;

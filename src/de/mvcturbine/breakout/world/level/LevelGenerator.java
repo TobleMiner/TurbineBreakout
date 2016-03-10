@@ -24,7 +24,7 @@ public class LevelGenerator
 	private int durabilityMin = 1;
 	private int durabilityMax = EntityBlock.MAX_DURABILITY;
 	private double brickPlaceProbability = 1.0;
-	private double powerupProbability = 1.0;
+	private double powerupProbability = 0.05;
 	private Vec2D paddleOffset = new Vec2D(0, 0.5);
 	private Size2D paddleSize = new Size2D(3, 0.5);
 	private Vec2D ballOffset = new Vec2D(1, 1);
@@ -62,7 +62,6 @@ public class LevelGenerator
 				{
 					Powerup[] powerups = Powerup.values();
 					Powerup pup = powerups[rand.nextInt(powerups.length)];
-					pup = Powerup.PADDLE_STICKY;
 					EntityPowerup powerup = new EntityPowerup(this.world);
 					powerup.setEffect(pup);
 					block.setPowerup(powerup);

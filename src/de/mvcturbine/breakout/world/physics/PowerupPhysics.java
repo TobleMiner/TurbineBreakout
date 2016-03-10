@@ -29,10 +29,10 @@ public class PowerupPhysics extends PhysicsModel
 				case BALL_BREAKTHROUGH:
 					w.getBall().setBreakthrough(true);
 					break;
-				case BALL_EXPLOSIVE:
-					break;
-				case BALL_MULTI:
-					break;
+				// case BALL_EXPLOSIVE:
+				// break;
+				// case BALL_MULTI:
+				// break;
 				case PADDLE_SMALLER:
 					double width = paddle.getSize().width;
 					width -= EntityPaddle.WIDTH_STEP;
@@ -48,9 +48,9 @@ public class PowerupPhysics extends PhysicsModel
 				case PADDLE_LAZ0R:
 					paddle.setArmed(true);
 					break;
-				case PADDLE_STICKY:
-					paddle.setSticky(true);
-					break;
+				// case PADDLE_STICKY:
+				// paddle.setSticky(true);
+				// break;
 				default:
 					break;
 			}
