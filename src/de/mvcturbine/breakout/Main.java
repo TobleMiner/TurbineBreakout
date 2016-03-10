@@ -44,7 +44,7 @@ public class Main extends JFrame implements Runnable
 		this.setSize(new Dimension(500, 500));
 		b.init();
 		this.addKeyListener(new KeyboardInput(world));
-		this.addMouseMotionListener(new MouseInput(world, this.getSize()));
+		this.addMouseMotionListener(new MouseInput(world, view));
 	}
 
 	public static void main(String[] args)

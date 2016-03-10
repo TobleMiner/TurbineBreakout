@@ -1,10 +1,10 @@
 package de.mvcturbine.breakout.input;
 
-import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import de.mvcturbine.breakout.ui.desktop.DesktopWorldView;
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.util.geom.Loc2D;
@@ -13,14 +13,12 @@ public class MouseInput implements MouseMotionListener, MouseListener
 {
 
 	private WorldBreakout world;
-	private EntityPaddle paddle;
-	private double xViewFactor;
+	private DesktopWorldView view;
 
-	public MouseInput(WorldBreakout world, Dimension viewSize)
+	public MouseInput(WorldBreakout world, DesktopWorldView view)
 	{
 		this.world = world;
-		this.paddle = world.getPaddle();
-		xViewFactor = world.getSize().getWidth() / viewSize.getWidth();
+		this.view = view;
 	}
 
 	@Override
@@ -31,9 +29,11 @@ public class MouseInput implements MouseMotionListener, MouseListener
 	@Override
 	public void mouseMoved(MouseEvent e)
 	{
-		Loc2D newLoc = new Loc2D(e.getX() * xViewFactor - paddle.getSize().getWidth() / 2,
+		EntityPaddle paddle = this.world.getPaddle();
+		double xfactor = this.world.getSize().getWidth() / this.view.getWidth();
+		Loc2D newLoc = new Loc2D(e.getX() * xfactor - paddle.getSize().getWidth() / 2,
 				paddle.getLocation().getY());
-		if(this.paddle.canMoveTo(newLoc)) this.paddle.setLocation(newLoc);
+		if(paddle.canMoveTo(newLoc)) paddle.setLocation(newLoc);
 	}
 
 	@Override
