@@ -14,7 +14,8 @@ import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.util.geom.Vec2D;
 
-public class LevelGenerator {
+public class LevelGenerator
+{
 	private final WorldBreakout world;
 
 	private Size2D blockSize = new Size2D(2, 1);
@@ -23,40 +24,53 @@ public class LevelGenerator {
 	private int durabilityMin = 1;
 	private int durabilityMax = EntityBlock.MAX_DURABILITY;
 	private double brickPlaceProbability = 1.0;
-	private double powerupProbability = 0.3;
+	private double powerupProbability = 0.05;
 	private Vec2D paddleOffset = new Vec2D(0, 0.5);
 	private Size2D paddleSize = new Size2D(3, 0.5);
 	private Vec2D ballOffset = new Vec2D(1, 1);
 	private Vec2D ballSpeedRel = new Vec2D(0.3, 0.3);
 
-	public LevelGenerator(WorldBreakout world) {
+	public LevelGenerator(WorldBreakout world)
+	{
 		this.world = world;
 	}
 
-	public void populateWorld() {
+	public void populateWorld()
+	{
 		Random rand = this.world.getGame().rand;
 		Dimension worldSize = this.world.getSize();
-		int columns = (int) ((worldSize.width + this.blockSpacing.width)
-				/ (this.blockSize.width + this.blockSpacing.width));
-		double width = columns * this.blockSize.width + (columns - 1) * this.blockSpacing.width;
+		int columns = (int) ((worldSize.width + this.blockSpacing.width) /
+				(this.blockSize.width + this.blockSpacing.width));
+		double width = columns * this.blockSize.width +
+				(columns - 1) * this.blockSpacing.width;
 		double border = (this.world.getSize().width - width) / 2;
-		for (int y = 0; y < this.rows; y++) {
-			for (int x = 0; x < columns; x++) {
-				if (rand.nextDouble() >= this.brickPlaceProbability)
-					continue;
-				int durability = this.durabilityMin + rand.nextInt(this.durabilityMax - this.durabilityMin + 1);
-				EntityBlock block = new EntityBlock(this.world, durability, this.blockSize);
-				block.setLocation(new Loc2D(border + x * (this.blockSize.width + this.blockSpacing.width),
-						worldSize.height - (this.blockSpacing.height + this.blockSize.height
-								+ y * (this.blockSize.height + blockSpacing.height))));
-				if (rand.nextDouble() < this.powerupProbability) {
+		for(int y = 0; y < this.rows; y++)
+		{
+			for(int x = 0; x < columns; x++)
+			{
+				if(rand.nextDouble() >= this.brickPlaceProbability) continue;
+				int durability = this.durabilityMin +
+						rand.nextInt(this.durabilityMax - this.durabilityMin + 1);
+				EntityBlock block = new EntityBlock(this.world, durability,
+						this.blockSize);
+				block.setLocation(
+						new Loc2D(
+								border + x * (this.blockSize.width +
+										this.blockSpacing.width),
+						worldSize.height - (this.blockSpacing.height +
+								this.blockSize.height +
+								y * (this.blockSize.height + blockSpacing.height))));
+				if(rand.nextDouble() < this.powerupProbability)
+				{
 					Powerup[] powerups = Powerup.values();
 					Powerup pup = powerups[rand.nextInt(powerups.length)];
 					EntityPowerup powerup = new EntityPowerup(this.world);
 					powerup.setEffect(pup);
 					block.setPowerup(powerup);
-					Loc2D center = block.getLocation().clone().add(new Vec2D(block.getSize()).divide(2));
-					Loc2D loc = center.clone().sub(new Vec2D(powerup.getSize()).divide(2));
+					Loc2D center = block.getLocation().clone()
+							.add(new Vec2D(block.getSize()).divide(2));
+					Loc2D loc = center.clone()
+							.sub(new Vec2D(powerup.getSize()).divide(2));
 					powerup.setLocation(loc);
 					this.world.addEntity(powerup);
 				}
@@ -67,24 +81,29 @@ public class LevelGenerator {
 		spawnEssentials();
 	}
 
-	public void spawnEssentials() {
+	public void spawnEssentials()
+	{
 		Dimension worldSize = this.world.getSize();
 
-		EntityGameAction ballPit = new EntityGameAction(world, new Size2D(worldSize.width, 1), world);
+		EntityGameAction ballPit = new EntityGameAction(world,
+				new Size2D(worldSize.width, 1), world);
 		ballPit.setLocation(new Loc2D());
 		this.world.addEntity(ballPit);
 
 		EntityPaddle paddle = new EntityPaddle(this.world, this.paddleSize);
-		paddle.setLocation(new Loc2D(worldSize.width / 2 - this.paddleSize.width / 2, ballPit.getSize().height)
-				.add(this.paddleOffset));
+		paddle.setLocation(new Loc2D(worldSize.width / 2 - this.paddleSize.width / 2,
+				ballPit.getSize().height).add(this.paddleOffset));
 		this.world.setPaddle(paddle);
 		this.world.addEntity(paddle);
 
 		EntityBall ball = new EntityBall(this.world);
 		ball.setLocation(paddle.getLocation().clone()
-				.add(new Vec2D(paddle.getSize().width / 2, paddle.getSize().height).add(this.ballOffset)));
-		ball.setVelocity(new Vec2D(this.world.getSize().width, 0).multiply(this.ballSpeedRel.x)
-				.add(new Vec2D(0, this.world.getSize().height).multiply(this.ballSpeedRel.y)));
+				.add(new Vec2D(paddle.getSize().width / 2, paddle.getSize().height)
+						.add(this.ballOffset)));
+		ball.setVelocity(new Vec2D(this.world.getSize().width, 0)
+				.multiply(this.ballSpeedRel.x)
+				.add(new Vec2D(0, this.world.getSize().height)
+						.multiply(this.ballSpeedRel.y)));
 		this.world.setBall(ball);
 		this.world.addEntity(ball);
 	}
@@ -92,7 +111,8 @@ public class LevelGenerator {
 	/**
 	 * @return the blockSize
 	 */
-	public Size2D getBlockSize() {
+	public Size2D getBlockSize()
+	{
 		return blockSize;
 	}
 
@@ -100,14 +120,16 @@ public class LevelGenerator {
 	 * @param blockSize
 	 *            the blockSize to set
 	 */
-	public void setBlockSize(Size2D blockSize) {
+	public void setBlockSize(Size2D blockSize)
+	{
 		this.blockSize = blockSize;
 	}
 
 	/**
 	 * @return the blockSpacing
 	 */
-	public Size2D getBlockSpacing() {
+	public Size2D getBlockSpacing()
+	{
 		return blockSpacing;
 	}
 
@@ -115,14 +137,16 @@ public class LevelGenerator {
 	 * @param blockSpacing
 	 *            the blockSpacing to set
 	 */
-	public void setBlockSpacing(Size2D blockSpacing) {
+	public void setBlockSpacing(Size2D blockSpacing)
+	{
 		this.blockSpacing = blockSpacing;
 	}
 
 	/**
 	 * @return the rows
 	 */
-	public int getRows() {
+	public int getRows()
+	{
 		return rows;
 	}
 
@@ -130,14 +154,16 @@ public class LevelGenerator {
 	 * @param rows
 	 *            the rows to set
 	 */
-	public void setRows(int rows) {
+	public void setRows(int rows)
+	{
 		this.rows = rows;
 	}
 
 	/**
 	 * @return the durabilityMin
 	 */
-	public int getDurabilityMin() {
+	public int getDurabilityMin()
+	{
 		return durabilityMin;
 	}
 
@@ -145,14 +171,16 @@ public class LevelGenerator {
 	 * @param durabilityMin
 	 *            the durabilityMin to set
 	 */
-	public void setDurabilityMin(int durabilityMin) {
+	public void setDurabilityMin(int durabilityMin)
+	{
 		this.durabilityMin = durabilityMin;
 	}
 
 	/**
 	 * @return the durabilityMax
 	 */
-	public int getDurabilityMax() {
+	public int getDurabilityMax()
+	{
 		return durabilityMax;
 	}
 
@@ -160,14 +188,16 @@ public class LevelGenerator {
 	 * @param durabilityMax
 	 *            the durabilityMax to set
 	 */
-	public void setDurabilityMax(int durabilityMax) {
+	public void setDurabilityMax(int durabilityMax)
+	{
 		this.durabilityMax = durabilityMax;
 	}
 
 	/**
 	 * @return the brickPlaceProbability
 	 */
-	public double getBrickPlaceProbability() {
+	public double getBrickPlaceProbability()
+	{
 		return brickPlaceProbability;
 	}
 
@@ -175,14 +205,16 @@ public class LevelGenerator {
 	 * @param brickPlaceProbability
 	 *            the brickPlaceProbability to set
 	 */
-	public void setBrickPlaceProbability(double brickPlaceProbability) {
+	public void setBrickPlaceProbability(double brickPlaceProbability)
+	{
 		this.brickPlaceProbability = brickPlaceProbability;
 	}
 
 	/**
 	 * @return the powerupProbability
 	 */
-	public double getPowerupProbability() {
+	public double getPowerupProbability()
+	{
 		return powerupProbability;
 	}
 
@@ -190,14 +222,16 @@ public class LevelGenerator {
 	 * @param powerupProbability
 	 *            the powerupProbability to set
 	 */
-	public void setPowerupProbability(double powerupProbability) {
+	public void setPowerupProbability(double powerupProbability)
+	{
 		this.powerupProbability = powerupProbability;
 	}
 
 	/**
 	 * @return the paddleSize
 	 */
-	public Size2D getPaddleSize() {
+	public Size2D getPaddleSize()
+	{
 		return paddleSize;
 	}
 
@@ -205,14 +239,16 @@ public class LevelGenerator {
 	 * @param paddleSize
 	 *            the paddleSize to set
 	 */
-	public void setPaddleSize(Size2D paddleSize) {
+	public void setPaddleSize(Size2D paddleSize)
+	{
 		this.paddleSize = paddleSize;
 	}
 
 	/**
 	 * @return the ballOffset
 	 */
-	public Vec2D getBallOffset() {
+	public Vec2D getBallOffset()
+	{
 		return ballOffset;
 	}
 
@@ -220,14 +256,16 @@ public class LevelGenerator {
 	 * @param ballOffset
 	 *            the ballOffset to set
 	 */
-	public void setBallOffset(Vec2D ballOffset) {
+	public void setBallOffset(Vec2D ballOffset)
+	{
 		this.ballOffset = ballOffset;
 	}
 
 	/**
 	 * @return the ballSpeedRel
 	 */
-	public Vec2D getBallSpeedRel() {
+	public Vec2D getBallSpeedRel()
+	{
 		return ballSpeedRel;
 	}
 
@@ -235,21 +273,24 @@ public class LevelGenerator {
 	 * @param ballSpeedRel
 	 *            the ballSpeedRel to set
 	 */
-	public void setBallSpeedRel(Vec2D ballSpeedRel) {
+	public void setBallSpeedRel(Vec2D ballSpeedRel)
+	{
 		this.ballSpeedRel = ballSpeedRel;
 	}
 
 	/**
 	 * @return the world
 	 */
-	public WorldBreakout getWorld() {
+	public WorldBreakout getWorld()
+	{
 		return world;
 	}
 
 	/**
 	 * @return the paddleOffset
 	 */
-	public Vec2D getPaddleOffset() {
+	public Vec2D getPaddleOffset()
+	{
 		return paddleOffset;
 	}
 
@@ -257,7 +298,8 @@ public class LevelGenerator {
 	 * @param paddleOffset
 	 *            the paddleOffset to set
 	 */
-	public void setPaddleOffset(Vec2D paddleOffset) {
+	public void setPaddleOffset(Vec2D paddleOffset)
+	{
 		this.paddleOffset = paddleOffset;
 	}
 }

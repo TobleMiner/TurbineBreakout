@@ -6,8 +6,10 @@ import de.mvcturbine.breakout.world.entity.EntityBall;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityGameAction;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
+import de.mvcturbine.breakout.world.entity.fx.EntityScore;
 import de.mvcturbine.breakout.world.level.LevelGenerator;
 import de.mvcturbine.game.Game;
+import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.entity.Entity;
 import de.mvcturbine.world.entity.MovingEntity;
@@ -30,6 +32,10 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 		super(game, size);
 		LevelGenerator gen = new LevelGenerator(this);
 		gen.populateWorld();
+
+		EntityScore score = new EntityScore(this);
+		score.setLocation(new Loc2D(0, 1));
+		addEntity(score);
 	}
 
 	@Override
@@ -117,5 +123,13 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	public void setPowerUpFallTime(double powerUpFallTime)
 	{
 		this.powerUpFallTime = powerUpFallTime;
+	}
+
+	/**
+	 * @return the score
+	 */
+	public double getScore()
+	{
+		return score;
 	}
 }

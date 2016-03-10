@@ -52,7 +52,8 @@ public class BlockTextureOverlayRender extends EntityTextureRender
 				block.getDurability() != block.getInitialDurability())
 		{
 			drawTexture(e, img, scale,
-					block.getInitialDurability() - block.getDurability());
+					(EntityBlock.MAX_DURABILITY - block.getInitialDurability() + 1) +
+							(block.getInitialDurability() - block.getDurability()));
 		}
 	}
 
