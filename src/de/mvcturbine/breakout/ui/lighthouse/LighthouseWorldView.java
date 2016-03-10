@@ -42,7 +42,7 @@ public class LighthouseWorldView extends LightHouseView
 			{
 				EntityRender render = (EntityRender) this.renderRegistry
 						.getRender(ent.getClass());
-				if(render != null) render.renderEntity(ent, img, scale);
+				if(render != null) render.render(ent, img, scale);
 			}
 			lighthouse.setFrame(img);
 		}
