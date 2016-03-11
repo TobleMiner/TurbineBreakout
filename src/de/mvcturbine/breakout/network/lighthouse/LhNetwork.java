@@ -111,8 +111,11 @@ public class LhNetwork implements Runnable
 					case ("bufLen"):
 						int bufferedFrames = Integer.parseInt(kvpair[1]);
 						System.out.format("%d frames buffered\n", bufferedFrames);
-						if(bufferedFrames <= this.frameBuffNum || SIMULATION)
+						int missingFrames = this.frameBuffNum - bufferedFrames;
+						if(SIMULATION) missingFrames = 1;
+						for(int i = 0; i < missingFrames; i++)
 						{
+							System.out.println("Sending frame");
 							sendFrame();
 						}
 						break;
