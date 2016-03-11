@@ -17,20 +17,12 @@ also make it easily modify and extensible.
 #Parted project
 To make the result of this project more universally reusable it has been split
 into two parts:
-1. The Game Engine
-   The game engine is called 'MVC-Turbine' and contains a lot of basic stuff
-   like utilities for geometry and the basic MVC pattern of the game.
-   It's split in multiple packages. Everything in 'de.mvcturbine.ui' ist he
-   view and everything that resides in 'de.mvcturbine.world' is the model.
-   The package 'de.mvcturbine.game' contains the controller of the game engine.
-   The only input of this controller is a fixed timed tick. Any more specific
-   inputs must be handled by the game built on the engine.
 
-2. The Game
-   The game itself is called 'TurbineBreakout' and contains all game specific
-   logic. The layout of the MVC classes is basically the same. Just apply the
-   perl regex 's/mvcturbine/mvcturbine.breakout/' to the above packages to get
-   the pacakge names in the game.
+1. The Game Engine  
+   The game engine is called 'MVC-Turbine' and contains a lot of basic stuff like utilities for geometry and the basic MVC pattern of the game. It's split in multiple packages. Everything in 'de.mvcturbine.ui' is the view and everything that resides in 'de.mvcturbine.world' is the model. The package 'de.mvcturbine.game' contains the controller of the game engine. The only input of this controller is a fixed timed tick. Any more specific inputs must be handled by the game built on the engine.
+
+2. The Game  
+   The game itself is called 'TurbineBreakout' and contains all game specific logic. The layout of the MVC classes is basically the same. Just apply the perl regex 's/mvcturbine/mvcturbine.breakout/' to the above packages to get the pacakge names in the game.
 
 
 #Implementing the MVC pattern
