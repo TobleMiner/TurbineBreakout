@@ -29,7 +29,7 @@ public class Main extends JFrame implements Runnable
 		LightHouseTextView tv = new LightHouseTextView(0.5d, "HELLO WORLD",
 				new LightHouseFontRender(), b, lighthouse);
 		world.addObserver(lhView);
-		if(false && !lhView.connect("10.10.10.34", 8000))
+		if(false && !lhView.connect("lighthouse.vm.local", 8000))
 		{
 			System.out.println("Failed to connect to lighthouse");
 			System.exit(1);
