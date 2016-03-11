@@ -10,7 +10,7 @@ import java.util.Observable;
 
 import de.mvcturbine.breakout.network.lighthouse.LhNetwork;
 import de.mvcturbine.breakout.ui.lighthouse.render.font.LightHouseFont;
-import de.mvcturbine.game.Game;
+import de.mvcturbine.world.World;
 
 /**
  * A view for the lighthouse displaying scroll text
@@ -26,8 +26,8 @@ public class LightHouseTextView extends LightHouseView
 	/** The scroll speed in chars per second */
 	private double speed;
 
-	/** The game this view belongs to */
-	private Game game;
+	/** The world this view belongs to */
+	private World world;
 
 	/** The current scroll position */
 	private double scroll = 0;
@@ -50,12 +50,12 @@ public class LightHouseTextView extends LightHouseView
 	 *            The lighthouse network layer
 	 */
 	public LightHouseTextView(double scrollSpeed, String text, LightHouseFont font,
-			Game game, LhNetwork lighthouse)
+			World world, LhNetwork lighthouse)
 	{
 		super(lighthouse);
 		this.speed = scrollSpeed;
 		this.font = font;
-		this.game = game;
+		this.world = world;
 		this.prerender(text);
 	}
 
@@ -92,7 +92,7 @@ public class LightHouseTextView extends LightHouseView
 		if(this.prerender == null || !this.lighthouse.connected()) return;
 		Dimension fontSize = this.font.getFontSize();
 		this.scroll += this.speed * this.font.getFontSize().getWidth() /
-				this.game.getTPS();
+				this.world.getGame().getTPS();
 		BufferedImage part = this.prerender.getSubimage((int) this.scroll, 0,
 				fontSize.width, fontSize.height);
 		BufferedImage lhImg = new BufferedImage((int) this.lighthouse.getSize().width,

@@ -14,9 +14,12 @@ import de.mvcturbine.breakout.ui.lighthouse.LightHouseTextView;
 import de.mvcturbine.breakout.ui.lighthouse.LighthouseWorldView;
 import de.mvcturbine.breakout.ui.lighthouse.render.font.LightHouseFontRender;
 import de.mvcturbine.breakout.world.WorldBreakout;
+import de.mvcturbine.breakout.world.WorldBreakout.GameCallback;
 
-public class Main extends JFrame implements Runnable
+public class Main extends JFrame implements Runnable, GameCallback
 {
+	private LhNetwork lighthouse;
+
 	@Override
 	public void run()
 	{
@@ -24,10 +27,8 @@ public class Main extends JFrame implements Runnable
 		Breakout b = new Breakout();
 		WorldBreakout world = new WorldBreakout(b, worldSize);
 		b.addObserver(world);
-		LhNetwork lighthouse = new LhNetwork();
-		LighthouseWorldView lhView = new LighthouseWorldView(world, lighthouse);
-		LightHouseTextView tv = new LightHouseTextView(0.5d, "HELLO WORLD",
-				new LightHouseFontRender(), b, lighthouse);
+		this.lighthouse = new LhNetwork();
+		LighthouseWorldView lhView = new LighthouseWorldView(world, this.lighthouse);
 		world.addObserver(lhView);
 		if(lhView.connect("rtsys.informatik.uni-kiel.de", 51122))
 			world.addObserver(lhView);
@@ -49,5 +50,21 @@ public class Main extends JFrame implements Runnable
 	public static void main(String[] args)
 	{
 		SwingUtilities.invokeLater(new Main());
+	}
+
+	@Override
+	public void onWin(WorldBreakout world)
+	{
+		LightHouseTextView tv = new LightHouseTextView(0.5d, "HELLO WORLD",
+				new LightHouseFontRender(), b, this.lighthouse);
+
+	}
+
+	@Override
+	public void onLoose(WorldBreakout world)
+	{
+		LightHouseTextView tv = new LightHouseTextView(0.5d, "HELLO WORLD",
+				new LightHouseFontRender(), b, this.lighthouse);
+
 	}
 }

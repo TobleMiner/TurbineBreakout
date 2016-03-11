@@ -14,6 +14,8 @@ import de.mvcturbine.world.entity.MovingEntity;
  */
 public class EntityBall extends MovingEntity
 {
+	public static int SPEED_INCREASE_PERC = 5;
+
 	/** true if ball should just break through blocks */
 	private boolean breakthrough = false;
 
@@ -66,5 +68,14 @@ public class EntityBall extends MovingEntity
 	public void setBreakthrough(boolean breakthrough)
 	{
 		this.breakthrough = breakthrough;
+	}
+
+	/**
+	 * Increases speed by {@code SPEED_INCREASE_PERC}
+	 */
+	public void speedup()
+	{
+		this.setVelocity(
+				this.getVelocity().clone().multiply(1 + SPEED_INCREASE_PERC / 100d));
 	}
 }

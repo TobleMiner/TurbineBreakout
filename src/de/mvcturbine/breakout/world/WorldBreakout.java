@@ -35,6 +35,8 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	/** The score */
 	private double score;
 
+	private GameCallback callback;
+
 	/**
 	 * Constructs a new breakout world
 	 * 
@@ -58,15 +60,18 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	public void tick()
 	{
 		super.tick();
-		boolean finish = true;
-		for(Entity e : this.entityRegistry)
+		if(this.callback != null)
 		{
-			if(e instanceof EntityBlock)
+			boolean finish = true;
+			for(Entity e : this.entityRegistry)
 			{
-				finish = false;
+				if(e instanceof EntityBlock)
+				{
+					finish = false;
+				}
 			}
+			if(finish) this.callback.onWin(this);
 		}
-		// if(finish) this.getGame().stop();
 	}
 
 	/**
@@ -89,6 +94,10 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	public void actionEntityHit(EntityGameAction entity, Entity who)
 	{
 		if(who instanceof MovingEntity) who.remove(true);
+		if(who instanceof EntityBall)
+		{
+			if(this.callback != null) this.callback.onLoose(this);
+		}
 	}
 
 	/**
@@ -157,5 +166,22 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	public double getScore()
 	{
 		return score;
+	}
+
+	public GameCallback getCallback()
+	{
+		return callback;
+	}
+
+	public void setCallback(GameCallback callback)
+	{
+		this.callback = callback;
+	}
+
+	public interface GameCallback
+	{
+		public void onWin(WorldBreakout world);
+
+		public void onLoose(WorldBreakout world);
 	}
 }
