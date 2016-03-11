@@ -16,6 +16,9 @@ import de.mvcturbine.world.entity.MovingEntity;
  */
 public class EntityPowerup extends MovingEntity
 {
+	/** Time in seconds for the powerup to fall the full height of the world */
+	public static double FALL_TIME = 5;
+
 	/** The effect of this powerup */
 	private Powerup effect;
 

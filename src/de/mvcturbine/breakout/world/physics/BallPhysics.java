@@ -12,8 +12,19 @@ import de.mvcturbine.world.entity.BoundEntity;
 import de.mvcturbine.world.entity.Entity;
 import de.mvcturbine.world.physics.PhysicsModel;
 
+/**
+ * Physics of a the ball
+ * 
+ * @author tsys
+ *
+ */
 public class BallPhysics extends PhysicsModel
 {
+	/**
+	 * Creates new physics for the {@code ball}
+	 * 
+	 * @param ball
+	 */
 	public BallPhysics(EntityBall ball)
 	{
 		super(ball);

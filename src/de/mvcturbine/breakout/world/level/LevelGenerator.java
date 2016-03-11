@@ -29,21 +29,39 @@ public class LevelGenerator
 	private Size2D blockSize = new Size2D(2, 1);
 	/** The spacing between blocks */
 	private Size2D blockSpacing = new Size2D(0.42, 0.42);
+	/** Number of rows */
 	private int rows = 4;
+	/** Minimum durability of bricks */
 	private int durabilityMin = 1;
+	/** Maximum durability of bricks */
 	private int durabilityMax = EntityBlock.MAX_DURABILITY;
+	/** Probability of a brick beeing placed */
 	private double brickPlaceProbability = 1.0;
+	/** Probability of a brick containing a powerup */
 	private double powerupProbability = 0.05;
+	/** Offset of paddle from ball pit */
 	private Vec2D paddleOffset = new Vec2D(0, 0.5);
+	/** Size of the paddle */
 	private Size2D paddleSize = new Size2D(3, 0.5);
+	/** Offset of ball from paddle */
 	private Vec2D ballOffset = new Vec2D(1, 1);
+	/** Ball speed relative to world size */
 	private Vec2D ballSpeedRel = new Vec2D(0.3, 0.3);
 
+	/**
+	 * Constructs a new level generator
+	 * 
+	 * @param world
+	 *            The world
+	 */
 	public LevelGenerator(WorldBreakout world)
 	{
 		this.world = world;
 	}
 
+	/**
+	 * Generates and spawns blocks, powerups, ball pit, paddle and ball
+	 */
 	public void populateWorld()
 	{
 		Random rand = this.world.getGame().rand;
@@ -88,6 +106,9 @@ public class LevelGenerator
 		spawnEssentials();
 	}
 
+	/**
+	 * Generates and spawns ball pit, paddle and ball
+	 */
 	public void spawnEssentials()
 	{
 		Dimension worldSize = this.world.getSize();

@@ -18,18 +18,31 @@ import de.mvcturbine.world.entity.MovingEntity;
 
 public class WorldBreakout extends World implements EntityGameAction.ActionCallback
 {
+	/** Point per block hit */
 	private static int POINTS_HIT = 5;
+	/** Points per destroyed block */
 	private static int POINTS_BREAK = 100;
 
+	/** The ball entity */
 	private EntityBall ball;
+	/** The paddle entity */
 	private EntityPaddle paddle;
+	/** The score entity */
 	private EntityScore entityScore;
 
-	private double powerUpFallTime = 0.2d;
-
+	/** The score multiplier */
 	private double multiplier;
+	/** The score */
 	private double score;
 
+	/**
+	 * Constructs a new breakout world
+	 * 
+	 * @param game
+	 *            The game (you lost)
+	 * @param size
+	 *            The size of the world
+	 */
 	public WorldBreakout(Game game, Dimension size)
 	{
 		super(game, size);
@@ -78,11 +91,19 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 		if(who instanceof MovingEntity) who.remove(true);
 	}
 
+	/**
+	 * Resets the score multiplier
+	 */
 	public void combobreaker()
 	{
 		this.multiplier = 1;
 	}
 
+	/**
+	 * Sets the score and spawns a visual entity showing the score change
+	 * 
+	 * @param score
+	 */
 	protected void setScore(double score)
 	{
 		Double diff = score - this.score;
@@ -96,11 +117,17 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 		this.score = score;
 	}
 
+	/**
+	 * Scores a block hit
+	 */
 	public void scoreHit()
 	{
 		setScore(this.score + (POINTS_HIT * this.multiplier));
 	}
 
+	/**
+	 * Scores a block break
+	 */
 	public void scoreBreak()
 	{
 		setScore(this.score + (POINTS_BREAK * this.multiplier));
@@ -122,23 +149,6 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	public void setPaddle(EntityPaddle paddle)
 	{
 		this.paddle = paddle;
-	}
-
-	/**
-	 * @return the powerUpFallTime
-	 */
-	public double getPowerUpFallTime()
-	{
-		return powerUpFallTime;
-	}
-
-	/**
-	 * @param powerUpFallTime
-	 *            the powerUpFallTime to set
-	 */
-	public void setPowerUpFallTime(double powerUpFallTime)
-	{
-		this.powerUpFallTime = powerUpFallTime;
 	}
 
 	/**

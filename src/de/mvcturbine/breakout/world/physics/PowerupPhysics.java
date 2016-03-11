@@ -7,9 +7,21 @@ import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 import de.mvcturbine.world.physics.PhysicsModel;
 
+/**
+ * Physics for powerups
+ * 
+ * @author tsys
+ *
+ */
 public class PowerupPhysics extends PhysicsModel
 {
 
+	/**
+	 * Constructs new physics for the powerup {@code e}
+	 * 
+	 * @param e
+	 *            The powerup
+	 */
 	public PowerupPhysics(Entity e)
 	{
 		super(e);

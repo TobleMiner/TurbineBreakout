@@ -11,9 +11,20 @@ import de.mvcturbine.util.geom.Vec2D;
 import de.mvcturbine.world.entity.Entity;
 import de.mvcturbine.world.physics.PhysicsModel;
 
+/**
+ * Physics of blocks
+ * 
+ * @author tsys
+ *
+ */
 public class BlockPhysics extends PhysicsModel
 {
 
+	/**
+	 * Constructs new physics for the {@code block}
+	 * 
+	 * @param block
+	 */
 	public BlockPhysics(EntityBlock block)
 	{
 		super(block);
@@ -41,7 +52,7 @@ public class BlockPhysics extends PhysicsModel
 					if(powerup != null)
 					{
 						powerup.setVelocity(new Vec2D(0,
-								w.getPowerUpFallTime() * -w.getSize().height));
+								-w.getSize().height / EntityPowerup.FALL_TIME));
 					}
 				}
 				else
