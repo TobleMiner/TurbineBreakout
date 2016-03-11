@@ -8,6 +8,12 @@ import java.util.Random;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Generic render for the lighthouse. Draws entities by their locaton and size
+ * 
+ * @author tsys
+ *
+ */
 public class GenericEntityPixelRender extends EntityRender
 {
 	private static boolean EPILEPSY = false;

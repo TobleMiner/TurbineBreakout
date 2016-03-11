@@ -5,11 +5,30 @@ import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * An entity that triggers a callback when an ingame entity hits it
+ * 
+ * @author tsys
+ *
+ */
 public class EntityGameAction extends Entity
 {
+	/** The size */
 	private Size2D size;
+
+	/** The callback */
 	private ActionCallback callback;
 
+	/**
+	 * Constructs a new EntityGameAction in {@code w}
+	 * 
+	 * @param w
+	 *            The world
+	 * @param size
+	 *            The size
+	 * @param callback
+	 *            The callback
+	 */
 	public EntityGameAction(World w, Size2D size, ActionCallback callback)
 	{
 		super(w);
@@ -36,6 +55,8 @@ public class EntityGameAction extends Entity
 	}
 
 	/**
+	 * Returns the callback
+	 * 
 	 * @return the callback
 	 */
 	public ActionCallback getCallback()
@@ -55,6 +76,12 @@ public class EntityGameAction extends Entity
 		});
 	}
 
+	/**
+	 * Interface for the action callback
+	 * 
+	 * @author tsys
+	 *
+	 */
 	public static interface ActionCallback
 	{
 		public void actionEntityHit(EntityGameAction entity, Entity who);

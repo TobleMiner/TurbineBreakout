@@ -7,6 +7,12 @@ import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Lighthouse render for the paddle
+ * 
+ * @author tsys
+ *
+ */
 public class PaddleRender extends EntityRender
 {
 	private static Color COLOR_ARMED = Color.RED;

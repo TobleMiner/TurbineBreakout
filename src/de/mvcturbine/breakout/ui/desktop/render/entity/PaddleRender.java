@@ -9,9 +9,14 @@ import de.mvcturbine.ui.render.entity.EntityRender;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Renders the paddle
+ * 
+ * @author tsys
+ *
+ */
 public class PaddleRender extends EntityRender
 {
-
 	private static Color COLOR_DEFAULT = Color.BLACK;
 	private static Color COLOR_ARMED = Color.RED;
 	private static Color COLOR_STICKY = Color.YELLOW;

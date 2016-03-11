@@ -14,11 +14,20 @@ import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.util.geom.Vec2D;
 
+/**
+ * Customizeable level generator.
+ * 
+ * @author tsys
+ *
+ */
 public class LevelGenerator
 {
+	/** The world to populate */
 	private final WorldBreakout world;
 
+	/** The size of blocks */
 	private Size2D blockSize = new Size2D(2, 1);
+	/** The spacing between blocks */
 	private Size2D blockSpacing = new Size2D(0.42, 0.42);
 	private int rows = 4;
 	private int durabilityMin = 1;
@@ -53,13 +62,11 @@ public class LevelGenerator
 						rand.nextInt(this.durabilityMax - this.durabilityMin + 1);
 				EntityBlock block = new EntityBlock(this.world, durability,
 						this.blockSize);
-				block.setLocation(
-						new Loc2D(
-								border + x * (this.blockSize.width +
-										this.blockSpacing.width),
+				block.setLocation(new Loc2D(
+						border + x * (this.blockSize.width + this.blockSpacing.width),
 						worldSize.height - (this.blockSpacing.height +
-								this.blockSize.height +
-								y * (this.blockSize.height + blockSpacing.height))));
+								this.blockSize.height + y *
+										(this.blockSize.height + blockSpacing.height))));
 				if(rand.nextDouble() < this.powerupProbability)
 				{
 					Powerup[] powerups = Powerup.values();
@@ -100,10 +107,10 @@ public class LevelGenerator
 		ball.setLocation(paddle.getLocation().clone()
 				.add(new Vec2D(paddle.getSize().width / 2, paddle.getSize().height)
 						.add(this.ballOffset)));
-		ball.setVelocity(new Vec2D(this.world.getSize().width, 0)
-				.multiply(this.ballSpeedRel.x)
-				.add(new Vec2D(0, this.world.getSize().height)
-						.multiply(this.ballSpeedRel.y)));
+		ball.setVelocity(
+				new Vec2D(this.world.getSize().width, 0).multiply(this.ballSpeedRel.x)
+						.add(new Vec2D(0, this.world.getSize().height)
+								.multiply(this.ballSpeedRel.y)));
 		this.world.setBall(ball);
 		this.world.addEntity(ball);
 	}

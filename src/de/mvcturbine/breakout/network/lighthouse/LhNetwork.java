@@ -12,32 +12,62 @@ import de.mvcturbine.util.geom.Size2D;
 
 public class LhNetwork implements Runnable
 {
+	/**
+	 * Buffering on the lighthouse simulation is strange. Just keep hammering
+	 * frames at it
+	 */
 	private static boolean SIMULATION = true;
 
+	/** Width of the lighthouse display */
 	private static int WIDTH = 28;
+	/** Height of the lighthouse display */
 	private static int HEIGHT = 14;
+	/** Frames per second on the lighthouse */
 	private static int FPS = 30;
+	/** KV pair separator on lighthouse messages */
 	private static String KV_SEPARATOR = "=";
 
+	/** TCP socket to use for lighthouse communication */
 	private Socket lightSocket;
+	/** Reader to buffer up a line of text from the lighthouse */
 	private BufferedReader input;
+	/** Stream to write my frames to */
 	private DataOutputStream output;
+	/** Thread to run network stuff on */
 	private Thread nwThread;
 
+	/** Connection status */
 	private boolean connected = false;
 
+	/** Buffer to hold the current frame */
 	private byte[] frame;
 
+	/** Number of frames to buffer */
 	private int frameBuffNum = FPS / 2;
 
+	/** Parser for lighthouse responses */
 	private KVPairParser parser;
 
+	/**
+	 * Constructs a new lighthouse network worker
+	 */
 	public LhNetwork()
 	{
 		this.frame = new byte[HEIGHT * WIDTH * 3];
 		this.parser = new KVPairParser(KV_SEPARATOR);
 	}
 
+	/**
+	 * Connect to the lighthouse at {@code host}:{@code port} (Supports IPv6!
+	 * (Better than TeamSpeak!))
+	 * 
+	 * @param host
+	 *            Host to connect to
+	 * @param port
+	 *            Port to connect to
+	 * @throws IOException
+	 *             If a connection error occurred
+	 */
 	public void connect(String host, int port) throws IOException
 	{
 		this.lightSocket = new Socket(host, port);
@@ -49,6 +79,11 @@ public class LhNetwork implements Runnable
 		this.connected = true;
 	}
 
+	/**
+	 * Checks if we are still connected
+	 * 
+	 * @return true if connection is still established
+	 */
 	public boolean connected()
 	{
 		return this.lightSocket != null && this.connected &&
@@ -102,6 +137,11 @@ public class LhNetwork implements Runnable
 		}
 	}
 
+	/**
+	 * Sends a frame to the lighthouse
+	 * 
+	 * @return true if frame was successfully sent
+	 */
 	synchronized public boolean sendFrame()
 	{
 		if(!this.connected) return false;
@@ -117,6 +157,12 @@ public class LhNetwork implements Runnable
 		return false;
 	}
 
+	/**
+	 * Set frame and convert it from BGR to RGB
+	 * 
+	 * @param img
+	 *            The image to load into the frame buffer
+	 */
 	public void setFrame(BufferedImage img)
 	{
 		for(int y = 0; y < img.getHeight(); y++)

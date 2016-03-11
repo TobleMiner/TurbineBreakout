@@ -11,10 +11,19 @@ import de.mvcturbine.util.geom.Loc2D;
 
 public class MouseInput implements MouseMotionListener, MouseListener
 {
-
+	/** The world this input listener modifies */
 	private WorldBreakout world;
+
+	/** The view the mouse moves in */
 	private DesktopWorldView view;
 
+	/**
+	 * Creates a new input listener on mouse input for the specified
+	 * {@link WorldBreakout} and {@link DesktopWorldView}
+	 * 
+	 * @param world
+	 * @param view
+	 */
 	public MouseInput(WorldBreakout world, DesktopWorldView view)
 	{
 		this.world = world;
@@ -39,7 +48,7 @@ public class MouseInput implements MouseMotionListener, MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-
+		if(this.world.getPaddle().isArmed()) this.world.getPaddle().shoot();
 	}
 
 	@Override
@@ -57,7 +66,7 @@ public class MouseInput implements MouseMotionListener, MouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
-		if(this.world.getPaddle().isArmed()) this.world.getPaddle().shoot();
+
 	}
 
 	@Override

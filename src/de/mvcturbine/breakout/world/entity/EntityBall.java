@@ -6,8 +6,15 @@ import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.entity.MovingEntity;
 
+/**
+ * The ball in a breakout game
+ * 
+ * @author tsys
+ *
+ */
 public class EntityBall extends MovingEntity
 {
+	/** true if ball should just break through blocks */
 	private boolean breakthrough = false;
 
 	public EntityBall(World w)
@@ -41,6 +48,8 @@ public class EntityBall extends MovingEntity
 	}
 
 	/**
+	 * Returns true if ball should break through blocks
+	 * 
 	 * @return the breakthrough
 	 */
 	public boolean isBreakthrough()
@@ -49,7 +58,10 @@ public class EntityBall extends MovingEntity
 	}
 
 	/**
-	 * @param breakthrough the breakthrough to set
+	 * Sets whether this ball should break through blocks
+	 * 
+	 * @param breakthrough
+	 *            the breakthrough to set
 	 */
 	public void setBreakthrough(boolean breakthrough)
 	{

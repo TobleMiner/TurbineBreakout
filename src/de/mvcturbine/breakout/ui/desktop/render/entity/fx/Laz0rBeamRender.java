@@ -8,6 +8,12 @@ import de.mvcturbine.ui.render.entity.EntityRender;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Renders Laz0r beams
+ * 
+ * @author tsys
+ *
+ */
 public class Laz0rBeamRender extends EntityRender
 {
 	private static Color LAZ0R_COLOR = Color.RED;

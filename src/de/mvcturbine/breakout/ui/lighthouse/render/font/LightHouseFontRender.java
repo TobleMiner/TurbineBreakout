@@ -8,10 +8,18 @@ import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+/**
+ * A monospace font for the lighthouse
+ * 
+ * @author tsys
+ *
+ */
 public class LightHouseFontRender implements LightHouseFont
 {
+	/** The size of this font */
 	private static Dimension SIZE = new Dimension(10, 12);
 
+	/** The cache for prerendered characters */
 	private HashMap<Character, BufferedImage> charset = new HashMap<>();
 
 	public LightHouseFontRender()
@@ -19,6 +27,9 @@ public class LightHouseFontRender implements LightHouseFont
 		prerenderFont();
 	}
 
+	/**
+	 * Prerenders the supported charset
+	 */
 	private void prerenderFont()
 	{
 		Font font = new Font("Monospaced", Font.PLAIN, SIZE.height);

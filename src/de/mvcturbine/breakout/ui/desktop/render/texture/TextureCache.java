@@ -9,17 +9,36 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Class to hold textures in different sizes;
+ * 
+ * @author tsys
+ *
+ */
 public class TextureCache
 {
+	/** The actual cache */
 	private HashMap<String, Image> cache = new HashMap<>();
 
+	/** The base textures */
 	private BufferedImage[] textures;
 
+	/** Initializes a new cache for {@code size} different textures */
 	public TextureCache(int size)
 	{
 		this.textures = new BufferedImage[size];
 	}
 
+	/**
+	 * Gets a texture from cache or rescales a texture and stores it if
+	 * necessary.
+	 * 
+	 * @param size
+	 *            The size of the texture
+	 * @param index
+	 *            The index of the base texture
+	 * @return The texture
+	 */
 	public Image getTexture(Dimension size, int index)
 	{
 		String id = String.format("%d=%d:%d", index, size.width, size.height);
@@ -33,6 +52,16 @@ public class TextureCache
 		return texture;
 	}
 
+	/**
+	 * Loads a base texture into this cache
+	 * 
+	 * @param uri
+	 *            The resource uri of the texture
+	 * @param index
+	 *            The index to store the texture at
+	 * @throws IOException
+	 *             if an error occurred loading the texture
+	 */
 	public void loadImageFromResource(String uri, int index) throws IOException
 	{
 		InputStream stream = this.getClass().getResourceAsStream(uri);
@@ -40,6 +69,8 @@ public class TextureCache
 	}
 
 	/**
+	 * Sets a base texture into this cache
+	 * 
 	 * @param texture
 	 *            the texture to set
 	 * @param index

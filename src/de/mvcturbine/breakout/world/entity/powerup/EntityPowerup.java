@@ -8,10 +8,23 @@ import de.mvcturbine.util.geom.Vec2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.entity.MovingEntity;
 
+/**
+ * A powerup
+ * 
+ * @author tsys
+ *
+ */
 public class EntityPowerup extends MovingEntity
 {
+	/** The effect of this powerup */
 	private Powerup effect;
 
+	/**
+	 * Creates a new powerup
+	 * 
+	 * @param w
+	 *            The world
+	 */
 	public EntityPowerup(World w)
 	{
 		super(w);
@@ -38,6 +51,8 @@ public class EntityPowerup extends MovingEntity
 	}
 
 	/**
+	 * Returns the effect of this powerup
+	 * 
 	 * @return the effect
 	 */
 	public Powerup getEffect()
@@ -46,6 +61,8 @@ public class EntityPowerup extends MovingEntity
 	}
 
 	/**
+	 * Sets the effect of this powerup
+	 * 
 	 * @param effect
 	 *            the effect to set
 	 */

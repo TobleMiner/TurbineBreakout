@@ -7,6 +7,12 @@ import de.mvcturbine.breakout.world.entity.EntityBall;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Ball pixel render for the lighthouse
+ * 
+ * @author tsys
+ *
+ */
 public class BallRender extends EntityRender
 {
 	private static Color COLOR_DEFAULT = Color.WHITE;

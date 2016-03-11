@@ -7,11 +7,23 @@ import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Renders texture overlays over blocks to indicate their state of destruction
+ * 
+ * @author tsys
+ *
+ */
 public class BlockTextureOverlayRender extends EntityTextureRender
 {
-
+	/** The underlying texture render */
 	private final BlockTextureRender textureRender;
 
+	/**
+	 * Constructs the overly render
+	 * 
+	 * @throws IOException
+	 *             if any of the textures can't be found
+	 */
 	public BlockTextureOverlayRender() throws IOException
 	{
 		super();

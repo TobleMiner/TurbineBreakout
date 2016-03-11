@@ -9,9 +9,14 @@ import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Renders powerups
+ * 
+ * @author tsys
+ *
+ */
 public class PowerupRender extends EntityRender
 {
-
 	@Override
 	public void renderEntity(Entity e, BufferedImage img, Size2D scale)
 	{

@@ -7,6 +7,12 @@ import de.mvcturbine.ui.render.entity.EntityRender;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Renders the ball
+ * 
+ * @author tsys
+ *
+ */
 public class BallRender extends EntityRender
 {
 	@Override

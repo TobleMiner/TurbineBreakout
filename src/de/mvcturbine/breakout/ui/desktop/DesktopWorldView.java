@@ -31,18 +31,31 @@ import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.World;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * The desktop view
+ * 
+ * @author tsys
+ *
+ */
 public class DesktopWorldView extends JPanel implements View
 {
+	/** Registry for renders */
 	private final RenderRegistry renderRegistry;
+	/** The world this view displays */
 	private final World world;
 
+	/**
+	 * Constructs a new view for {@code world}
+	 * 
+	 * @param world
+	 *            The {@link WorldBreakout} to display
+	 */
 	public DesktopWorldView(WorldBreakout world)
 	{
 		super();
 		this.world = world;
 		this.renderRegistry = new RenderRegistry();
-		this.renderRegistry.registerRender(new GenericEntityMeshRender(),
-				Entity.class);
+		this.renderRegistry.registerRender(new GenericEntityMeshRender(), Entity.class);
 		try
 		{
 			this.renderRegistry.registerRender(new BlockTextureOverlayRender(),
@@ -51,11 +64,9 @@ public class DesktopWorldView extends JPanel implements View
 		catch(IOException ex)
 		{
 			ex.printStackTrace();
-			this.renderRegistry.registerRender(new BlockColorRender(),
-					EntityBlock.class);
+			this.renderRegistry.registerRender(new BlockColorRender(), EntityBlock.class);
 		}
-		this.renderRegistry.registerRender(new Laz0rBeamRender(),
-				EntityLaz0rBeam.class);
+		this.renderRegistry.registerRender(new Laz0rBeamRender(), EntityLaz0rBeam.class);
 		this.renderRegistry.registerRender(new PaddleRender(), EntityPaddle.class);
 		this.renderRegistry.registerRender(new ScoreRender(), EntityScore.class);
 		this.renderRegistry.registerRender(new ScoreParticleRender(),

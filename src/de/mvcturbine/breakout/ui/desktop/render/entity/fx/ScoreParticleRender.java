@@ -11,6 +11,12 @@ import de.mvcturbine.ui.render.entity.EntityRender;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Renders score particles
+ * 
+ * @author tsys
+ *
+ */
 public class ScoreParticleRender extends EntityRender
 {
 	HashMap<EntityScoreParticle, Color> colorMap = new HashMap<>();
@@ -44,10 +50,7 @@ public class ScoreParticleRender extends EntityRender
 				(int) (particle.getSize().getHeight() * scale.getY())));
 
 		gfx.drawString(label, (int) (particle.getLocation().getX() * scale.getX()),
-				(int) (img.getHeight() -
-						particle.getLocation().getY() * scale.getY()));
-
-		// System.out.println(particle.getVelocity().getY());
+				(int) (img.getHeight() - particle.getLocation().getY() * scale.getY()));
 	}
 
 }

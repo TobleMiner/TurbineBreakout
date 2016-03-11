@@ -9,9 +9,15 @@ import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Generic render applicable for all entities. Draws the bounding box of an
+ * entity
+ * 
+ * @author tsys
+ *
+ */
 public class GenericEntityMeshRender extends EntityRender
 {
-
 	@Override
 	public void renderEntity(Entity e, BufferedImage img, Size2D scale)
 	{

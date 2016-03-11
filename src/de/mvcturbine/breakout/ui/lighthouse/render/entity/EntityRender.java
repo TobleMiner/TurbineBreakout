@@ -7,6 +7,12 @@ import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Entity render for the lighthouse
+ * 
+ * @author tsys
+ *
+ */
 public abstract class EntityRender extends de.mvcturbine.ui.render.entity.EntityRender
 {
 	protected void drawEntity(Entity e, BufferedImage img, Size2D scale, Color c)

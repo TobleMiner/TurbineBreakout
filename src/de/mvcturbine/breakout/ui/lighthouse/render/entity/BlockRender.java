@@ -7,6 +7,12 @@ import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Block render for the lighthouse
+ * 
+ * @author tsys
+ *
+ */
 public class BlockRender extends EntityRender
 {
 	private static Color[] COLORS = { Color.BLACK, Color.BLUE, Color.GREEN, Color.ORANGE,

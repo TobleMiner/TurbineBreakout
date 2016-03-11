@@ -12,14 +12,43 @@ import de.mvcturbine.breakout.network.lighthouse.LhNetwork;
 import de.mvcturbine.breakout.ui.lighthouse.render.font.LightHouseFont;
 import de.mvcturbine.game.Game;
 
+/**
+ * A view for the lighthouse displaying scroll text
+ * 
+ * @author tsys
+ *
+ */
 public class LightHouseTextView extends LightHouseView
 {
+	/** The font to use */
 	private LightHouseFont font;
+
+	/** The scroll speed in chars per second */
 	private double speed;
+
+	/** The game this view belongs to */
 	private Game game;
+
+	/** The current scroll position */
 	private double scroll = 0;
+
+	/** The prerendered image of the text to display */
 	private BufferedImage prerender;
 
+	/**
+	 * Construct a new scroll text for the lighthouse
+	 * 
+	 * @param scrollSpeed
+	 *            Scroll speed in characters per second
+	 * @param text
+	 *            The text to display
+	 * @param font
+	 *            The font to use
+	 * @param game
+	 *            The game instance
+	 * @param lighthouse
+	 *            The lighthouse network layer
+	 */
 	public LightHouseTextView(double scrollSpeed, String text, LightHouseFont font,
 			Game game, LhNetwork lighthouse)
 	{
@@ -30,6 +59,12 @@ public class LightHouseTextView extends LightHouseView
 		this.prerender(text);
 	}
 
+	/**
+	 * Prerender the whole text as an image
+	 * 
+	 * @param str
+	 *            The string to render
+	 */
 	protected void prerender(String str)
 	{
 		Dimension fontSize = this.font.getFontSize();
@@ -42,6 +77,8 @@ public class LightHouseTextView extends LightHouseView
 		{
 			gfx.drawImage(this.font.getChar(text[i]), i * fontSize.width, 0, null);
 		}
+		// Thanks again to the people who decided putting [0, 0] in the BOTTOM
+		// left corner
 		AffineTransform flip = AffineTransform.getScaleInstance(1, -1);
 		flip.translate(0, -image.getHeight());
 		AffineTransformOp op = new AffineTransformOp(flip,

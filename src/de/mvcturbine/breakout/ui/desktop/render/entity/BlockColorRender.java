@@ -9,6 +9,13 @@ import de.mvcturbine.ui.render.entity.EntityRender;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Renders a block in a solid color. Fallback render if textures for texture
+ * render can't be loaded
+ * 
+ * @author tsys
+ *
+ */
 public class BlockColorRender extends EntityRender
 {
 	private static Color[] colors = { Color.WHITE, Color.BLUE, Color.GREEN, Color.GRAY,

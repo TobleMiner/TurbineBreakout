@@ -4,8 +4,15 @@ import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.entity.Entity;
 
+/**
+ * Entity to display the score
+ * 
+ * @author tsys
+ *
+ */
 public class EntityScore extends Entity
 {
+	/** Size */
 	private final Size2D size = new Size2D(3, 1);
 
 	public EntityScore(WorldBreakout w)
