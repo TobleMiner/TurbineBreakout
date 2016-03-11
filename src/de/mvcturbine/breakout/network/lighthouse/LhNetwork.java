@@ -16,7 +16,7 @@ public class LhNetwork implements Runnable
 	 * Buffering on the lighthouse simulation is strange. Just keep hammering
 	 * frames at it
 	 */
-	private static boolean SIMULATION = true;
+	private static boolean SIMULATION = false;
 
 	/** Width of the lighthouse display */
 	private static int WIDTH = 28;
@@ -43,7 +43,7 @@ public class LhNetwork implements Runnable
 	private byte[] frame;
 
 	/** Number of frames to buffer */
-	private int frameBuffNum = FPS / 2;
+	private int frameBuffNum = FPS / 3;
 
 	/** Parser for lighthouse responses */
 	private KVPairParser parser;
