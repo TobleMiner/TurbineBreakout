@@ -96,6 +96,7 @@ public class DesktopWorldView extends JPanel implements View
 		graphics.clearRect(0, 0, width, height);
 		for(Entity ent : new ArrayList<Entity>(this.world.getAllEntities()))
 		{
+			assert ent != null;
 			EntityRender render = (EntityRender) this.renderRegistry
 					.getRender(ent.getClass());
 			if(render != null) render.render(ent, img, scale);

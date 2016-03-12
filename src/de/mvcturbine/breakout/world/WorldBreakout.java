@@ -8,7 +8,6 @@ import de.mvcturbine.breakout.world.entity.EntityGameAction;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
 import de.mvcturbine.breakout.world.entity.fx.EntityScore;
 import de.mvcturbine.breakout.world.entity.fx.EntityScoreParticle;
-import de.mvcturbine.breakout.world.level.LevelGenerator;
 import de.mvcturbine.game.Game;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Vec2D;
@@ -48,12 +47,6 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 	public WorldBreakout(Game game, Dimension size)
 	{
 		super(game, size);
-		LevelGenerator gen = new LevelGenerator(this);
-		gen.populateWorld();
-
-		this.entityScore = new EntityScore(this);
-		this.entityScore.setLocation(new Loc2D(0, 1));
-		addEntity(entityScore);
 	}
 
 	@Override
@@ -178,10 +171,38 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 		this.callback = callback;
 	}
 
+	/**
+	 * @return the entityScore
+	 */
+	public EntityScore getEntityScore()
+	{
+		return entityScore;
+	}
+
+	/**
+	 * @param entityScore
+	 *            the entityScore to set
+	 */
+	public void setEntityScore(EntityScore entityScore)
+	{
+		this.entityScore = entityScore;
+	}
+
 	public interface GameCallback
 	{
 		public void onWin(WorldBreakout world);
 
 		public void onLoose(WorldBreakout world);
+	}
+
+	@Override
+	public void resetWorld()
+	{
+		super.resetWorld();
+		this.score = 0;
+		this.entityScore = null;
+		this.ball = null;
+		this.paddle = null;
+		this.multiplier = 1;
 	}
 }

@@ -8,11 +8,13 @@ import de.mvcturbine.breakout.world.entity.EntityBall;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.entity.EntityGameAction;
 import de.mvcturbine.breakout.world.entity.EntityPaddle;
+import de.mvcturbine.breakout.world.entity.fx.EntityScore;
 import de.mvcturbine.breakout.world.entity.powerup.EntityPowerup;
 import de.mvcturbine.breakout.world.entity.powerup.Powerup;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.util.geom.Vec2D;
+import de.mvcturbine.world.entity.BoundEntity;
 
 /**
  * Customizeable level generator.
@@ -47,6 +49,8 @@ public class LevelGenerator
 	private Vec2D ballOffset = new Vec2D(1, 1);
 	/** Ball speed relative to world size */
 	private Vec2D ballSpeedRel = new Vec2D(0.3, 0.3);
+	/** Width of world bounds */
+	private final int boundWidth = 5;
 
 	/**
 	 * Constructs a new level generator
@@ -104,6 +108,7 @@ public class LevelGenerator
 		}
 
 		spawnEssentials();
+		createBounds();
 	}
 
 	/**
@@ -134,6 +139,35 @@ public class LevelGenerator
 								.multiply(this.ballSpeedRel.y)));
 		this.world.setBall(ball);
 		this.world.addEntity(ball);
+
+		EntityScore entityScore = new EntityScore(this.world);
+		entityScore.setLocation(new Loc2D(0, 1));
+		this.world.setEntityScore(entityScore);
+		this.world.addEntity(entityScore);
+	}
+
+	/**
+	 * Creates rectangular bounds from BoundEntities and places them around the
+	 * world boundaries
+	 */
+	public void createBounds()
+	{
+		BoundEntity bound = new BoundEntity(this.world);
+		bound.setLocation(new Loc2D(0, -boundWidth));
+		bound.setSize(new Size2D(this.world.getSize().width, boundWidth));
+		this.world.addEntity(bound);
+		bound = new BoundEntity(this.world);
+		bound.setLocation(new Loc2D(this.world.getSize().width, 0));
+		bound.setSize(new Size2D(boundWidth, this.world.getSize().height));
+		this.world.addEntity(bound);
+		bound = new BoundEntity(this.world);
+		bound.setLocation(new Loc2D(0, this.world.getSize().height));
+		bound.setSize(new Size2D(this.world.getSize().width, boundWidth));
+		this.world.addEntity(bound);
+		bound = new BoundEntity(this.world);
+		bound.setLocation(new Loc2D(-boundWidth, 0));
+		bound.setSize(new Size2D(boundWidth, this.world.getSize().height));
+		this.world.addEntity(bound);
 	}
 
 	/**
