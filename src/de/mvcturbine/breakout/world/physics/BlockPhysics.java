@@ -43,6 +43,7 @@ public class BlockPhysics extends PhysicsModel
 				EntityBall ball = (EntityBall) e;
 				BoundingBox babb = ball.getBounds();
 
+				// Continue if ball doesn't intersect with block
 				if(!babb.intersects(blbb)) continue;
 				if(!ball.isBreakthrough())
 					block.hit();

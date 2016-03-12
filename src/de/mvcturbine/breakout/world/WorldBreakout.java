@@ -188,10 +188,28 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 		this.entityScore = entityScore;
 	}
 
+	/**
+	 * Callbacks for game win and loss
+	 * 
+	 * @author tsys
+	 *
+	 */
 	public interface GameCallback
 	{
+		/**
+		 * Called when a player wins the game in {@code world}
+		 * 
+		 * @param world
+		 *            The world
+		 */
 		public void onWin(WorldBreakout world);
 
+		/**
+		 * Called when a player looses the game in {@code world}
+		 * 
+		 * @param world
+		 *            The world
+		 */
 		public void onLoose(WorldBreakout world);
 	}
 

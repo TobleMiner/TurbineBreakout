@@ -39,13 +39,20 @@ public class BallPhysics extends PhysicsModel
 
 		for(Entity ent : w.getAllEntities())
 		{
-			if(ent == ball) continue;
-			if(!ent.isSolid()) continue;
+			if(ent == ball) continue; // Continue if checking against same
+										// entity
+			if(!ent.isSolid()) continue; // Continue if other entity isn't solid
 			BoundingBox entbb = ent.getBounds();
 
-			if(!bbb.intersects(entbb)) continue;
-			if(ent instanceof BoundEntity) w.combobreaker();
-			if(ent instanceof EntityPaddle)
+			if(!bbb.intersects(entbb)) continue; // Continue if entities don't
+													// intersect
+			if(ent instanceof BoundEntity) w.combobreaker(); // Reset score
+																// multiplier if
+																// world
+																// boundary was
+																// hit
+			if(ent instanceof EntityPaddle) // Calculate reflection angle for
+											// pedal
 			{
 				double angleDelta = EntityPaddle.REFLECT_ANGLE_MAX -
 						EntityPaddle.REFLECT_ANGLE_MIN;
@@ -62,6 +69,7 @@ public class BallPhysics extends PhysicsModel
 			}
 			else
 			{
+				// Ignore blocks if ball is break through
 				if(ball.isBreakthrough() && (ent instanceof EntityBlock)) continue;
 				double angle = bbb.getCollisionAngle(entbb);
 				if(!Double.isNaN(angle))
@@ -69,6 +77,8 @@ public class BallPhysics extends PhysicsModel
 					ball.setVelocity(ball.getVelocity().clone().setAngle(angle));
 					Vec2D ballVelocity = ball.getVelocity().clone();
 					double yxQuotient = ballVelocity.getY() / ballVelocity.getX();
+					// Don't touch ball angle if y component of vector is big
+					// enough
 					if(Math.abs(yxQuotient) >= EntityBall.MIN_REL_Y_SPEED) continue;
 					Vec2D newVelocity = new Vec2D(ballVelocity.getX(),
 							ballVelocity.getY() *

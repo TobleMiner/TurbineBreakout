@@ -33,6 +33,7 @@ public class PowerupPhysics extends PhysicsModel
 		EntityPowerup powerup = (EntityPowerup) this.entity;
 		WorldBreakout w = (WorldBreakout) powerup.getWorld();
 		EntityPaddle paddle = w.getPaddle();
+		// Don't do anything if powerup doesn't intersect with paddle
 		if(!powerup.getBounds().intersects(paddle.getBounds())) return;
 		powerup.remove(true);
 		switch(powerup.getEffect())
