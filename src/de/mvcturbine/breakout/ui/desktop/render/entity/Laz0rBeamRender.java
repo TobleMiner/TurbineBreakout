@@ -1,4 +1,4 @@
-package de.mvcturbine.breakout.ui.desktop.render.entity.fx;
+package de.mvcturbine.breakout.ui.desktop.render.entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

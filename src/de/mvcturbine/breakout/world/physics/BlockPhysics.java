@@ -3,7 +3,7 @@ package de.mvcturbine.breakout.world.physics;
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.entity.EntityBall;
 import de.mvcturbine.breakout.world.entity.EntityBlock;
-import de.mvcturbine.breakout.world.entity.fx.EntityLaz0rBeam;
+import de.mvcturbine.breakout.world.entity.EntityLaz0rBeam;
 import de.mvcturbine.breakout.world.entity.powerup.EntityPowerup;
 import de.mvcturbine.util.geom.BoundingBox;
 import de.mvcturbine.util.geom.EntityBB;

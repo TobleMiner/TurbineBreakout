@@ -1,4 +1,4 @@
-package de.mvcturbine.breakout.world.entity.fx;
+package de.mvcturbine.breakout.world.entity;
 
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.world.World;

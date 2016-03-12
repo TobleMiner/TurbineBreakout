@@ -2,7 +2,6 @@ package de.mvcturbine.breakout.world.entity;
 
 import java.util.List;
 
-import de.mvcturbine.breakout.world.entity.fx.EntityLaz0rBeam;
 import de.mvcturbine.util.geom.Loc2D;
 import de.mvcturbine.util.geom.Size2D;
 import de.mvcturbine.util.geom.Vec2D;
