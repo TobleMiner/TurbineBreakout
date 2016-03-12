@@ -124,7 +124,8 @@ public class LhNetwork implements Runnable
 				{
 					case ("bufLen"):
 						int bufferedFrames = Integer.parseInt(kvpair[1]);
-						System.out.format("%d frames buffered\n", bufferedFrames);
+						System.out.format("%d %s buffered\n", bufferedFrames,
+								bufferedFrames == 1 ? "frame" : "frames");
 						int missingFrames = this.frameBuffNum - bufferedFrames;
 						if(this.simulation) missingFrames = 1;
 						for(int i = 0; i < missingFrames; i++)

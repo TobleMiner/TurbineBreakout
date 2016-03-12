@@ -64,7 +64,6 @@ public class BlockPhysics extends PhysicsModel
 				if(e.getBounds().intersects(blbb))
 				{
 					block.destroy();
-					w.scoreHit();
 					e.remove(true);
 				}
 			}
