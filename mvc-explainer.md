@@ -18,7 +18,7 @@ To make the result of this project more universally reusable it has been split i
    The game engine is called 'MVC-Turbine' and contains a lot of basic stuff like utilities for geometry and the basic MVC pattern of the game. It's split in multiple packages. Everything in 'de.mvcturbine.ui' is the view and everything that resides in 'de.mvcturbine.world' is the model. The package 'de.mvcturbine.game' contains the controller of the game engine. The only input of this controller is a fixed timed tick. Any more specific inputs must be handled by the game built on the engine.
 
 2. The Game  
-   The game itself is called 'TurbineBreakout' and contains all game specific logic. The layout of the MVC classes is basically the same. Just apply the perl regex 's/mvcturbine/mvcturbine.breakout/' to the above packages to get the pacakge names in the game.
+   The game itself is called 'TurbineBreakout' and contains all game specific logic. The layout of the MVC classes is basically the same. Just apply the perl regex 's/mvcturbine/mvcturbine.breakout/' to the above packages to get the package names in the game. Additional controllers are in 'de.mvcturbine.breakout.input'.
 
 
 #Implementing the MVC pattern
@@ -53,3 +53,7 @@ They are totally suited for collisions of one moving entity with a solid, static
 Another problem is the rendering process. For the sake of simplicity each entity is fully rendered each and every tick. This consumes a lot of CPU time. It would be far more efficient to render entities only if their appearance changes.
 
 Also the tick update loop could be improved. A lot of entities perform collision checks. And currently they all check if they do collide with another entity by theirselves. This could be improved by performing these checks only once per tick per world by the world itself.
+
+The current design doesn't allow for multiple balls. This could be changed fairly easily but the physics for colliding two moving object are in the making so it will come soon but isn't supported yet.
+
+P.S. If you do want to run any tests with the lighthouse simulator look into 'src/de/mvcturbine/breakout/game/Breakout.java'. Our animations only work on the lighthouse.
