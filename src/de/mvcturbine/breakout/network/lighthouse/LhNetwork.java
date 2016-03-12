@@ -16,7 +16,7 @@ public class LhNetwork implements Runnable
 	 * Buffering on the lighthouse simulation is strange. Just keep hammering
 	 * frames at it
 	 */
-	private static boolean SIMULATION = true;
+	private boolean simulation = true;
 
 	/** Width of the lighthouse display */
 	private static int WIDTH = 28;
@@ -43,7 +43,7 @@ public class LhNetwork implements Runnable
 	private byte[] frame;
 
 	/** Number of frames to buffer */
-	private int frameBuffNum = 3;
+	private int frameBuffNum = FPS / 3;
 
 	/** Parser for lighthouse responses */
 	private KVPairParser parser;
@@ -126,10 +126,9 @@ public class LhNetwork implements Runnable
 						int bufferedFrames = Integer.parseInt(kvpair[1]);
 						System.out.format("%d frames buffered\n", bufferedFrames);
 						int missingFrames = this.frameBuffNum - bufferedFrames;
-						if(SIMULATION) missingFrames = 1;
+						if(this.simulation) missingFrames = 1;
 						for(int i = 0; i < missingFrames; i++)
 						{
-							System.out.println("Sending frame");
 							sendFrame();
 						}
 						break;
@@ -196,8 +195,30 @@ public class LhNetwork implements Runnable
 		}
 	}
 
+	/**
+	 * Returns the size of the lighthouse
+	 * 
+	 * @return the size of the lighthouse
+	 */
 	public Size2D getSize()
 	{
 		return new Size2D(WIDTH, HEIGHT);
+	}
+
+	/**
+	 * @return the simulation
+	 */
+	public boolean isSimulation()
+	{
+		return simulation;
+	}
+
+	/**
+	 * @param simulation
+	 *            the simulation to set
+	 */
+	public void setSimulation(boolean simulation)
+	{
+		this.simulation = simulation;
 	}
 }
