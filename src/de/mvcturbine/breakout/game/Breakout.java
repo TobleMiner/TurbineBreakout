@@ -15,8 +15,10 @@ import de.mvcturbine.breakout.ui.lighthouse.LighthouseWorldView;
 import de.mvcturbine.breakout.ui.lighthouse.render.font.LightHouseFontRender;
 import de.mvcturbine.breakout.world.WorldBreakout;
 import de.mvcturbine.breakout.world.WorldBreakout.GameCallback;
+import de.mvcturbine.breakout.world.entity.EntityBlock;
 import de.mvcturbine.breakout.world.level.LevelGenerator;
 import de.mvcturbine.game.Game;
+import de.mvcturbine.world.entity.Entity;
 
 public class Breakout extends Game implements GameCallback, AnimationFinishedCallback
 {
@@ -80,6 +82,13 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 	private void newGame()
 	{
 		this.stop();
+		for(Entity e : this.world.getAllEntities())
+		{
+			if(e instanceof EntityBlock)
+			{
+				this.world.deleteObserver(e);
+			}
+		}
 		this.world.resetWorld();
 		this.world.setCallback(this);
 		LevelGenerator generator = new LevelGenerator(world);
