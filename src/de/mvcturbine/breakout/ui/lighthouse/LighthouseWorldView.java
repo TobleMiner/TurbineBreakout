@@ -69,6 +69,7 @@ public class LighthouseWorldView extends LightHouseView
 					BufferedImage.TYPE_4BYTE_ABGR);
 			for(Entity ent : new ArrayList<Entity>(this.world.getAllEntities()))
 			{
+				assert ent != null;
 				EntityRender render = (EntityRender) this.renderRegistry
 						.getRender(ent.getClass());
 				if(render != null) render.render(ent, img, scale);

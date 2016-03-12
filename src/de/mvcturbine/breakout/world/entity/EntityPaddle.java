@@ -16,9 +16,9 @@ import de.mvcturbine.world.entity.Entity;
  */
 public class EntityPaddle extends Entity
 {
-	/** Minimum reflection agle */
+	/** Minimum reflection angle */
 	public static double REFLECT_ANGLE_MIN = -45 / 180d * Math.PI;
-	/** Maximum reflection agle */
+	/** Maximum reflection angle */
 	public static double REFLECT_ANGLE_MAX = 45 / 180d * Math.PI;
 
 	/** Maximum paddle width */

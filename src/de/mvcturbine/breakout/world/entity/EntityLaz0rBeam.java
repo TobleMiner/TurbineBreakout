@@ -22,6 +22,7 @@ public class EntityLaz0rBeam extends MovingEntity
 	 * Constructs a new laser beam in {@code w}
 	 * 
 	 * @param w
+	 *            the world
 	 */
 	public EntityLaz0rBeam(World w)
 	{

@@ -18,6 +18,7 @@ import de.mvcturbine.world.entity.Entity;
  */
 public class BlockColorRender extends EntityRender
 {
+	/** Colors for different levels of destroyedness */
 	private static Color[] colors = { Color.WHITE, Color.BLUE, Color.GREEN, Color.GRAY,
 			Color.DARK_GRAY };
 

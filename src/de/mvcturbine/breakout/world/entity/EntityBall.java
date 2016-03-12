@@ -14,8 +14,10 @@ import de.mvcturbine.world.entity.MovingEntity;
  */
 public class EntityBall extends MovingEntity
 {
+	/** Minimum ratio of y component of velocity to x component */
 	public static double MIN_REL_Y_SPEED = 0.2;
 
+	/** Percentage of speed increase per block hit */
 	public static int SPEED_INCREASE_PERC = 2;
 
 	/** true if ball should just break through blocks */

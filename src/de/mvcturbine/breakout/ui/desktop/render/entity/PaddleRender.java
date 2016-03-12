@@ -33,7 +33,7 @@ public class PaddleRender extends EntityRender
 		int posY = img.getHeight() -
 				(int) (paddle.getLocation().getY() * scale.getY() + height);
 		gfx.fillRect(posX, posY, width, height);
-		if(paddle.isSticky())
+		if(paddle.isSticky()) // Draw a yellow line on top of paddle if sticky
 		{
 			gfx.setColor(COLOR_STICKY);
 			gfx.drawLine(posX, posY, posX + width, posY);

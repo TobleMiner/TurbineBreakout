@@ -61,7 +61,7 @@ public class DesktopWorldView extends JPanel implements View
 			this.renderRegistry.registerRender(new BlockTextureOverlayRender(),
 					EntityBlock.class);
 		}
-		catch(IOException ex)
+		catch(IOException ex) // Fall back to untextured render
 		{
 			ex.printStackTrace();
 			this.renderRegistry.registerRender(new BlockColorRender(), EntityBlock.class);
