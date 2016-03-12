@@ -33,7 +33,7 @@ The view is comprised of the view itself and multiple renders that are responsib
 The controller is split into two parts. The first part is direct user input via keyboard or mouse the second part is a fixed game tick that is needed to perform tasks like updating the position of moving objects.
 
 #How it works
-Initially the game (Controller) is initialized. Then a world (Model) is added to it as an observer. The world then adds a bunch of entities (Model) to itself. After that the views get initialized and are added as observers of the model. Finally a MouseInputListener (Controller) and a KeyInputListener (Controller) are added to modify the model accordingly to user input.
+Initially the game (Controller) is initialized. Then a world (Model) is added to it as an observer. The initialization method then adds a bunch of entities (Model) to the world. After that the views get initialized and are added as observers of the model. Finally a MouseInputListener (Controller) and a KeyInputListener (Controller) are added to modify the model accordingly to user input.
 
 At this point the initialization of the game is finished.
 
