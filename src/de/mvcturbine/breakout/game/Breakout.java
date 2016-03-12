@@ -106,7 +106,7 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 		if(this.lighthouse.connected())
 		{
 			this.world.deleteObserver(this.lhview);
-			this.lhview = new LightHouseTextView(0.5d, "YOU WON!",
+			this.lhview = new LightHouseTextView(0.5d, "YOU WIN!",
 					new LightHouseFontRender(), this.world, this.lighthouse);
 			((LightHouseTextView) this.lhview).setCallback(this);
 			this.world.addObserver(this.lhview);

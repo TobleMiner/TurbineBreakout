@@ -67,17 +67,14 @@ public class BallPhysics extends PhysicsModel
 				if(!Double.isNaN(angle))
 				{
 					ball.setVelocity(ball.getVelocity().clone().setAngle(angle));
-					if(Math.abs(
-							ball.getVelocity().getY() / ball.getVelocity().getX()) < 0.2)
-					{
-						Vec2D ballVelocity = ball.getVelocity().clone();
-						double yxQuotient = ballVelocity.getY() / ballVelocity.getX();
-						Vec2D newVelocity = new Vec2D(ballVelocity.getX(),
-								ballVelocity.getY() * (0.2 / yxQuotient));
-						newVelocity
-								.multiply(ballVelocity.length() / newVelocity.length());
-						ball.setVelocity(newVelocity);
-					}
+					Vec2D ballVelocity = ball.getVelocity().clone();
+					double yxQuotient = ballVelocity.getY() / ballVelocity.getX();
+					if(Math.abs(yxQuotient) >= EntityBall.MIN_REL_Y_SPEED) continue;
+					Vec2D newVelocity = new Vec2D(ballVelocity.getX(),
+							ballVelocity.getY() *
+									(EntityBall.MIN_REL_Y_SPEED / yxQuotient));
+					newVelocity.multiply(ballVelocity.length() / newVelocity.length());
+					ball.setVelocity(newVelocity);
 				}
 			}
 		}
