@@ -16,7 +16,7 @@ public class LhNetwork implements Runnable
 	 * Buffering on the lighthouse simulation is strange. Just keep hammering
 	 * frames at it
 	 */
-	private static boolean SIMULATION = false;
+	private static boolean SIMULATION = true;
 
 	/** Width of the lighthouse display */
 	private static int WIDTH = 28;
@@ -43,7 +43,7 @@ public class LhNetwork implements Runnable
 	private byte[] frame;
 
 	/** Number of frames to buffer */
-	private int frameBuffNum = FPS / 3;
+	private int frameBuffNum = 3;
 
 	/** Parser for lighthouse responses */
 	private KVPairParser parser;
@@ -77,6 +77,20 @@ public class LhNetwork implements Runnable
 		this.nwThread = new Thread(this);
 		this.nwThread.start();
 		this.connected = true;
+	}
+
+	public boolean tryConnect(String host, int port)
+	{
+		try
+		{
+			connect(host, port);
+			return true;
+		}
+		catch(IOException ex)
+		{
+			ex.printStackTrace();
+		}
+		return false;
 	}
 
 	/**

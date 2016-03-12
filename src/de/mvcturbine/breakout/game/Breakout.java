@@ -15,4 +15,16 @@ public class Breakout extends Game
 	{
 		super.tick();
 	}
+
+	@Override
+	public void stop()
+	{
+		super.stop();
+	}
+
+	@Override
+	public void start()
+	{
+		super.start();
+	}
 }

@@ -35,6 +35,10 @@ public class LightHouseTextView extends LightHouseView
 	/** The prerendered image of the text to display */
 	private BufferedImage prerender;
 
+	private boolean finished = false;
+
+	private AnimationFinishedCallback callback;
+
 	/**
 	 * Construct a new scroll text for the lighthouse
 	 * 
@@ -68,7 +72,7 @@ public class LightHouseTextView extends LightHouseView
 	protected void prerender(String str)
 	{
 		Dimension fontSize = this.font.getFontSize();
-		int width = str.length() * fontSize.width;
+		int width = str.length() * fontSize.width + (int) this.lighthouse.getSize().width;
 		BufferedImage image = new BufferedImage(width,
 				(int) this.lighthouse.getSize().height, BufferedImage.TYPE_3BYTE_BGR);
 		Graphics2D gfx = (Graphics2D) image.getGraphics();
@@ -89,10 +93,16 @@ public class LightHouseTextView extends LightHouseView
 	@Override
 	public void update(Observable arg0, Object arg1)
 	{
-		if(this.prerender == null || !this.lighthouse.connected()) return;
+		if(this.prerender == null || !this.lighthouse.connected() || this.finished)
+			return;
 		Dimension fontSize = this.font.getFontSize();
 		this.scroll += this.speed * this.font.getFontSize().getWidth() /
 				this.world.getGame().getTPS();
+		if(this.scroll >= this.prerender.getWidth() - this.lighthouse.getSize().width)
+		{
+			this.finished = true;
+			if(this.callback != null) this.callback.animationFinished(this);
+		}
 		BufferedImage part = this.prerender.getSubimage((int) this.scroll, 0,
 				fontSize.width, fontSize.height);
 		BufferedImage lhImg = new BufferedImage((int) this.lighthouse.getSize().width,
@@ -102,5 +112,20 @@ public class LightHouseTextView extends LightHouseView
 						(int) this.lighthouse.getSize().height, Image.SCALE_FAST),
 				0, 0, null);
 		this.lighthouse.setFrame(lhImg);
+	}
+
+	public AnimationFinishedCallback getCallback()
+	{
+		return callback;
+	}
+
+	public void setCallback(AnimationFinishedCallback callback)
+	{
+		this.callback = callback;
+	}
+
+	public interface AnimationFinishedCallback
+	{
+		public void animationFinished(LightHouseTextView tv);
 	}
 }
