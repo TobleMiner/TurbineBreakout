@@ -35,13 +35,20 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 	{
 		super();
 		this.app = app;
-		this.lighthouse = new LhNetwork();
 	}
 
 	@Override
 	public void init()
 	{
 		super.init();
+		this.lighthouse = new LhNetwork();
+		this.world = new WorldBreakout(this, this.worldSize);
+		this.world.setCallback(this);
+		this.addObserver(this.world);
+		if(!this.lighthouse.tryConnect("10.10.10.34", 8000))
+			// if(!this.lighthouse.tryConnect("rtsys.informatik.uni-kiel.de",
+			// 51122))
+			System.err.println("Failed to connect to lighthouse");
 		this.newGame();
 	}
 
@@ -60,16 +67,10 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 	private void newGame()
 	{
 		this.stop();
-		if(this.world == null)
-		{
-			this.world = new WorldBreakout(this, this.worldSize);
-		}
-		this.deleteObserver(this.world);
 		this.world.resetWorld();
 		this.world.setCallback(this);
 		LevelGenerator generator = new LevelGenerator(world);
 		generator.populateWorld();
-		this.addObserver(this.world);
 		if(this.lighthouse.connected())
 		{
 			if(this.lhview != null) this.world.deleteObserver(lhview);

@@ -40,52 +40,43 @@ public class BallPhysics extends PhysicsModel
 		for(Entity ent : w.getAllEntities())
 		{
 			if(ent == ball) continue;
-			if(ent.isSolid())
-			{
-				BoundingBox entbb = ent.getBounds();
+			if(!ent.isSolid()) continue;
+			BoundingBox entbb = ent.getBounds();
 
-				if(bbb.intersects(entbb))
+			if(!bbb.intersects(entbb)) continue;
+			if(ent instanceof BoundEntity) w.combobreaker();
+			if(ent instanceof EntityPaddle)
+			{
+				double angleDelta = EntityPaddle.REFLECT_ANGLE_MAX -
+						EntityPaddle.REFLECT_ANGLE_MIN;
+				Loc2D midpoint = ball.getLocation()
+						.add(new Vec2D(ball.getSize()).divide(2));
+				EntityPaddle paddle = w.getPaddle();
+				double paddleDelta = midpoint.getX() - paddle.getLocation().getX();
+				double angle = EntityPaddle.REFLECT_ANGLE_MIN +
+						angleDelta * (paddleDelta / paddle.getSize().width);
+				angle = Math.max(angle, EntityPaddle.REFLECT_ANGLE_MIN);
+				angle = Math.min(angle, EntityPaddle.REFLECT_ANGLE_MAX);
+				ball.setVelocity(ball.getVelocity().clone()
+						.setAngle(new Vec2D(1, 0).getAngle() + Math.PI / 2 - angle));
+			}
+			else
+			{
+				if(ball.isBreakthrough() && (ent instanceof EntityBlock)) continue;
+				double angle = bbb.getCollisionAngle(entbb);
+				if(!Double.isNaN(angle))
 				{
-					if(ent instanceof BoundEntity) w.combobreaker();
-					if(ent instanceof EntityPaddle)
+					ball.setVelocity(ball.getVelocity().clone().setAngle(angle));
+					if(Math.abs(
+							ball.getVelocity().getY() / ball.getVelocity().getX()) < 0.2)
 					{
-						double angleDelta = EntityPaddle.REFLECT_ANGLE_MAX -
-								EntityPaddle.REFLECT_ANGLE_MIN;
-						Loc2D midpoint = ball.getLocation()
-								.add(new Vec2D(ball.getSize()).divide(2));
-						EntityPaddle paddle = w.getPaddle();
-						double paddleDelta = midpoint.getX() -
-								paddle.getLocation().getX();
-						double angle = EntityPaddle.REFLECT_ANGLE_MIN +
-								angleDelta * (paddleDelta / paddle.getSize().width);
-						angle = Math.max(angle, EntityPaddle.REFLECT_ANGLE_MIN);
-						angle = Math.min(angle, EntityPaddle.REFLECT_ANGLE_MAX);
-						ball.setVelocity(ball.getVelocity().clone().setAngle(
-								new Vec2D(1, 0).getAngle() + Math.PI / 2 - angle));
-					}
-					else
-					{
-						if(!ball.isBreakthrough() || !(ent instanceof EntityBlock))
-						{
-							double angle = bbb.getCollisionAngle(entbb);
-							if(!Double.isNaN(angle))
-							{
-								ball.setVelocity(
-										ball.getVelocity().clone().setAngle(angle));
-								if(Math.abs(ball.getVelocity().getY() /
-										ball.getVelocity().getX()) < 0.2)
-								{
-									Vec2D ballVelocity = ball.getVelocity().clone();
-									double yxQuotient = ballVelocity.getY() /
-											ballVelocity.getX();
-									Vec2D newVelocity = new Vec2D(ballVelocity.getX(),
-											ballVelocity.getY() * (0.2 / yxQuotient));
-									newVelocity.multiply(
-											ballVelocity.length() / newVelocity.length());
-									ball.setVelocity(newVelocity);
-								}
-							}
-						}
+						Vec2D ballVelocity = ball.getVelocity().clone();
+						double yxQuotient = ballVelocity.getY() / ballVelocity.getX();
+						Vec2D newVelocity = new Vec2D(ballVelocity.getX(),
+								ballVelocity.getY() * (0.2 / yxQuotient));
+						newVelocity
+								.multiply(ballVelocity.length() / newVelocity.length());
+						ball.setVelocity(newVelocity);
 					}
 				}
 			}
