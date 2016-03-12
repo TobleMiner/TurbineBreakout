@@ -140,9 +140,7 @@ public class EntityBlock extends Entity
 	 */
 	public void destroy()
 	{
-		this.durability = 0;
-		this.remove(true);
-		if(this.powerup != null) this.powerup.remove(true);
+		destroy(true);
 	}
 
 	/**
@@ -174,5 +172,12 @@ public class EntityBlock extends Entity
 	public int getInitialDurability()
 	{
 		return initialDurability;
+	}
+
+	public void destroy(boolean destroyPowerup)
+	{
+		this.durability = 0;
+		this.remove(true);
+		if(this.powerup != null && destroyPowerup) this.powerup.remove(true);
 	}
 }

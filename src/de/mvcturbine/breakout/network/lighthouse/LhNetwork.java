@@ -16,7 +16,7 @@ public class LhNetwork implements Runnable
 	 * Buffering on the lighthouse simulation is strange. Just keep hammering
 	 * frames at it
 	 */
-	private boolean simulation = true;
+	private boolean simulation = false;
 
 	/** Width of the lighthouse display */
 	private static int WIDTH = 28;

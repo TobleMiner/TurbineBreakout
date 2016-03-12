@@ -1,8 +1,6 @@
 package de.mvcturbine.breakout.game;
 
 import java.awt.Dimension;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 
@@ -25,9 +23,6 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 	private LhNetwork lighthouse;
 	private WorldBreakout world;
 	private LightHouseView lhview;
-	private DesktopWorldView localView;
-	private MouseMotionListener motionListener;
-	private KeyListener keyListener;
 	private Dimension worldSize = new Dimension(20, 20);
 	private JFrame app;
 
@@ -45,10 +40,22 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 		this.world = new WorldBreakout(this, this.worldSize);
 		this.world.setCallback(this);
 		this.addObserver(this.world);
-		if(!this.lighthouse.tryConnect("10.10.10.34", 8000))
+		if(!this.lighthouse.tryConnect("lighthouse.vm.local", 8000))
 			// if(!this.lighthouse.tryConnect("rtsys.informatik.uni-kiel.de",
 			// 51122))
 			System.err.println("Failed to connect to lighthouse");
+		this.lighthouse.setSimulation(true);
+		DesktopWorldView localView = new DesktopWorldView(this.world);
+		MouseInput motionListener = new MouseInput(this.world, localView);
+		this.app.addMouseMotionListener(motionListener);
+		KeyboardInput keyListener = new KeyboardInput(world);
+		this.app.addKeyListener(keyListener);
+		this.app.getContentPane().add(localView);
+		this.app.pack();
+		this.app.setSize(new Dimension(500, 500));
+		this.app.invalidate();
+		this.app.setVisible(true);
+		this.world.addObserver(localView);
 		this.newGame();
 	}
 
@@ -77,31 +84,13 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 			this.lhview = new LighthouseWorldView(world, this.lighthouse);
 			this.world.addObserver(this.lhview);
 		}
-		if(this.localView != null)
-		{
-			this.world.deleteObserver(this.localView);
-			this.app.getContentPane().remove(this.localView);
-		}
-		this.localView = new DesktopWorldView(this.world);
-		this.app.getContentPane().add(this.localView);
-		this.app.pack();
-		this.app.setSize(new Dimension(500, 500));
-		this.app.invalidate();
-		this.app.setVisible(true);
-		if(this.motionListener != null)
-			this.app.removeMouseMotionListener(this.motionListener);
-		this.motionListener = new MouseInput(this.world, this.localView);
-		this.app.addMouseMotionListener(this.motionListener);
-		if(this.keyListener != null) this.app.removeKeyListener(this.keyListener);
-		this.keyListener = new KeyboardInput(world);
-		this.app.addKeyListener(this.keyListener);
-		this.world.addObserver(this.localView);
 		this.start();
 	}
 
 	@Override
 	public void onWin(WorldBreakout world)
 	{
+		this.world.removeBall();
 		this.world.setCallback(null);
 		if(this.lighthouse.connected())
 		{

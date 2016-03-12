@@ -44,7 +44,10 @@ public class BlockPhysics extends PhysicsModel
 				BoundingBox babb = ball.getBounds();
 
 				if(!babb.intersects(blbb)) continue;
-				block.hit();
+				if(!ball.isBreakthrough())
+					block.hit();
+				else
+					block.destroy(false);
 				if(block.getDurability() == 0)
 				{
 					ball.speedup();

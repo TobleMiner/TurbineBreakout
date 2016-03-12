@@ -205,4 +205,9 @@ public class WorldBreakout extends World implements EntityGameAction.ActionCallb
 		this.paddle = null;
 		this.multiplier = 1;
 	}
+
+	public void removeBall()
+	{
+		this.ball.remove(true);
+	}
 }
