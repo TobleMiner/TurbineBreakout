@@ -19,6 +19,7 @@ import de.mvcturbine.world.entity.Entity;
  */
 public class ScoreParticleRender extends EntityRender
 {
+	/** Storage for score particle colors per entity */
 	HashMap<EntityScoreParticle, Color> colorMap = new HashMap<>();
 
 	@Override
@@ -29,6 +30,7 @@ public class ScoreParticleRender extends EntityRender
 
 		Double difference = new Double(particle.getDiff());
 
+		// Prefix text with spaces to match digits with main score display
 		for(int i = 0; i < (new Double(particle.getWorld().getScore()).toString()
 				.length()) - (difference.toString().length()); i++)
 		{

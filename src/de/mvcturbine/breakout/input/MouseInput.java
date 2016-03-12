@@ -22,7 +22,9 @@ public class MouseInput implements MouseMotionListener, MouseListener
 	 * {@link WorldBreakout} and {@link DesktopWorldView}
 	 * 
 	 * @param world
+	 *            the World
 	 * @param view
+	 *            the View
 	 */
 	public MouseInput(WorldBreakout world, DesktopWorldView view)
 	{
@@ -38,6 +40,7 @@ public class MouseInput implements MouseMotionListener, MouseListener
 	@Override
 	public void mouseMoved(MouseEvent e)
 	{
+		// Adjust paddle position
 		EntityPaddle paddle = this.world.getPaddle();
 		double xfactor = this.world.getSize().getWidth() / this.view.getWidth();
 		Loc2D newLoc = new Loc2D(e.getX() * xfactor - paddle.getSize().getWidth() / 2,
@@ -48,7 +51,7 @@ public class MouseInput implements MouseMotionListener, MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		if(this.world.getPaddle().isArmed()) this.world.getPaddle().shoot();
+
 	}
 
 	@Override

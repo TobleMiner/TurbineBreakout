@@ -40,11 +40,14 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 		this.world = new WorldBreakout(this, this.worldSize);
 		this.world.setCallback(this);
 		this.addObserver(this.world);
+		// Try to connect to lighthouse
 		if(!this.lighthouse.tryConnect("lighthouse.vm.local", 8000))
 			// if(!this.lighthouse.tryConnect("rtsys.informatik.uni-kiel.de",
 			// 51122))
 			System.err.println("Failed to connect to lighthouse");
 		this.lighthouse.setSimulation(true);
+		// Setup desktop view (Probably not the best place to do it, but it's
+		// 5:30 am) TODO
 		DesktopWorldView localView = new DesktopWorldView(this.world);
 		MouseInput motionListener = new MouseInput(this.world, localView);
 		this.app.addMouseMotionListener(motionListener);
@@ -71,6 +74,9 @@ public class Breakout extends Game implements GameCallback, AnimationFinishedCal
 		super.tick();
 	}
 
+	/**
+	 * Starts a new game
+	 */
 	private void newGame()
 	{
 		this.stop();

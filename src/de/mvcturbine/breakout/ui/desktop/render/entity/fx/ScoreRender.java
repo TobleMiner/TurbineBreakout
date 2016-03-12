@@ -18,6 +18,7 @@ import de.mvcturbine.world.entity.Entity;
  */
 public class ScoreRender extends EntityRender
 {
+	/** Color to show the score in */
 	private final Color scoreColor = Color.BLUE;
 
 	@Override

@@ -36,16 +36,19 @@ public class KeyboardInput implements KeyListener
 		{
 			case KeyEvent.VK_LEFT:
 			case KeyEvent.VK_A:
+				// Move paddle left
 				Loc2D newLoc = paddle.getLocation().clone().add(new Loc2D(-0.5, 0));
 				if(paddle.canMoveTo(newLoc)) paddle.setLocation(newLoc);
 				break;
 			case KeyEvent.VK_RIGHT:
 			case KeyEvent.VK_D:
+				// Move paddle right
 				newLoc = paddle.getLocation().clone().add(new Loc2D(0.5, 0));
 				if(paddle.canMoveTo(newLoc)) paddle.setLocation(newLoc);
 				break;
 			case KeyEvent.VK_SPACE:
 			case KeyEvent.VK_W:
+				// Shoot
 				if(paddle.isArmed()) paddle.shoot();
 				break;
 			default:

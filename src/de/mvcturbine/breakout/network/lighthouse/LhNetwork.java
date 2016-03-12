@@ -128,6 +128,7 @@ public class LhNetwork implements Runnable
 								bufferedFrames == 1 ? "frame" : "frames");
 						int missingFrames = this.frameBuffNum - bufferedFrames;
 						if(this.simulation) missingFrames = 1;
+						// Hammer the lighthouse with frames to fill buffer
 						for(int i = 0; i < missingFrames; i++)
 						{
 							sendFrame();
